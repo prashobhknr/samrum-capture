@@ -1,0 +1,322 @@
+<html xmlns="http://www.w3.org/1999/xhtml" data-lt-installed="true"><head id="ctl00_Head1"><meta http-equiv="X-UA-Compatible" content="IE=8"><title>
+	SAMRUM
+</title><link href="stylesheets/samrum.css" type="text/css" rel="stylesheet">
+    <script>
+        history.forward();
+
+        var cancelAjax = false;
+
+        function onRequestStart(ajaxManager, eventArgs) {
+            if (cancelAjax) {
+                eventArgs.EnableAjax = false;
+            }
+        }
+
+        function StopPropagation(e) {
+            //cancel bubbling  
+            e.cancelBubble = true;
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+        }  
+
+        function onButtonClicking(sender, args) {
+            var item = args.get_item();
+
+            if (item.get_attributes().getAttribute("ConfirmText") != null) {
+                if (!confirm(item.get_attributes().getAttribute("ConfirmText"))) {
+                    args.set_cancel(true);
+                }
+            }
+
+            if (item.get_attributes().getAttribute("ValidateDirty") != null) {
+                if (!CheckDirty()) {
+                    args.set_cancel(true);
+                }
+            }
+
+            if (item.get_attributes().getAttribute("ClearDirty") != null) {
+                SetDirty(false);
+            }
+
+            if (item.get_attributes().getAttribute("SetDirty") != null) {
+                SetDirty(true);
+            }
+
+            if (item.get_attributes().getAttribute("OnClickClientScript") != null) {
+                eval(item.get_attributes().getAttribute("OnClickClientScript"));
+                args.set_cancel(true);
+            }
+
+            if (item.get_attributes().getAttribute("NoAjax") != null)
+                cancelAjax = true;
+        }
+
+    </script>
+<link href="App_Themes/DefaultTheme/Grid.DefaultTheme.css" type="text/css" rel="stylesheet"><link href="App_Themes/DefaultTheme/Grid.SubList.css" type="text/css" rel="stylesheet"><link href="App_Themes/DefaultTheme/ToolBar.DefaultTheme.css" type="text/css" rel="stylesheet"><style id="claude-agent-animation-styles">
+      @keyframes claude-pulse {
+        0% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+        50% {
+          box-shadow: 
+            inset 0 0 15px rgba(217, 119, 87, 0.7),
+            inset 0 0 25px rgba(217, 119, 87, 0.5),
+            inset 0 0 35px rgba(217, 119, 87, 0.2);
+        }
+        100% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+      }
+    </style></head>
+<body>
+    <form name="aspnetForm" method="post" action="login.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTM0MTcxNzIyMA9kFgJmD2QWAgIDD2QWEAIDDw8WAh4HVG9vbFRpcAUQU2FtcnVtIDEuMS43MS40OGRkAgUPDxYCHgdWaXNpYmxlaGRkAgcPDxYCHwFoZGQCCw9kFgRmD2QWAgIBDw8WAh4ITm9kZVRleHQVAQpJbmxvZ2duaW5nZBYCAgEPDxYCHgRUZXh0BQMgLSBkZAIDD2QWAgIBDw8WAh8BaGRkAhEPFgIfAWhkAhMPZBYCAgEPZBYCAgEPZBYEAgIPZBYCZg9kFgICAQ8UKwACZGRkAgQPPCsADQIAFCsAAmQXAAEWAhYKDwIDFCsAAzwrAAUBBAUKU2hvd0NvbHVtbjwrAAUBBAURUHJvamVjdE5hbWVDb2x1bW48KwAFAQQFGFByb2plY3REZXNjcmlwdGlvbkNvbHVtbmRlFCsAAAspelRlbGVyaWsuV2ViLlVJLkdyaWRDaGlsZExvYWRNb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ATwrAAcACyl1VGVsZXJpay5XZWIuVUkuR3JpZEVkaXRNb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0AWRkZGZkAhUPFgIfAWhkAhsPDxYCHwMFFFNBTVJVTSBXZWIgMS4xLjcxLjQ4ZGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFNWN0bDAwJExlZnRQYW5lbDFQbGFjZUhvbGRlciRsZ25Mb2dpbiRMb2dpbkltYWdlQnV0dG9u69oDdjSqy/YhKe48U/A32HflJ4I=">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=3aQh7nnt2KGmeju4sNRz9aKoQ2SEOfifbRJpgYKZzW4pTqVk6cV0fPyJwOrOYDqXWcJnUo-72PzPx0O26qTDccvtlBg1&amp;t=639088132438931106" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=BLHkt042gM7IG9aXGGfgYceSGOOHE3fo4LvoxNO_bcuHMpl8FwcXDHdsc1x_HPa0IbyMO2TmShLWWAYBiNaiKxTHh2rPl773N1tGQtgDTQJiAFXrc2GtxiDZ7qaJiQHN4oaTtsf0UNKmqKgYrIghWh4ygzs1&amp;t=ffffffffe8c5bfb1" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=8o85MZh4LOkSMZ0-Pnenkm2WJ0rvX-4VZbBJRZ-2ILoCKuR5wrsO_VebmjZwEG4SyAfyz6LLIi2PX0MKX_CZfDfJd26aBMrqIAYecE1r2qnpHBlPiK6Dy7JoAzSNEz-2xjQYUqrmv9l1BYJ15oNGNEgqvUiW5RznSoSDRhNSrRU1oHal0&amp;t=ffffffffa50b82b2" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=il2zGEi7rxlOsHvmkApw2pfG6ovRtFaOnkECdrgedCYqKwAj1SvDaaHYeZdOSrWktnMQDQdRpzqeRNi5I4xQqPyuX6ck6Zzs3ykhAfnBHR8vYzgZpManPy3PH6dNXoULY80LYzo48LtorxTwgjhIVAnPxfFczWrJlw3g-4affmtNkYNK0&amp;t=ffffffffa50b82b2" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="C2EE9ABB">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBQLcq9ubCAKQnaOCAwKespbHAgKy6I+SAwKbrsWdCHBAQfW/PuBtM8uGtcrDGL86YOZf">
+</div>
+        <table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%">
+            <tbody><tr>
+                <td class="samrum-topareaframe">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody><tr>
+                            <td align="left" width="1%" nowrap="">
+                                <img id="ctl00_Image1" src="Images/main_top_bak.png" style="border-width:0px;">
+                                <a id="ctl00_lnkLogo" title="Samrum 1.1.71.48" href="./"><img title="Samrum 1.1.71.48" src="Images/logo_main.png" style="border-width:0px;"></a>
+                            </td>                                
+                            <td width="97%" nowrap="" valign="middle">
+                                
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td valign="middle" align="right" width="1%" nowrap="">
+                                &nbsp;
+                                <span id="ctl00_lblNotLoggedIn" class="samrum-toplabel">Ej inloggad&nbsp;</span>
+                            </td>
+                        </tr>
+                        <tr id="ctl00_trLoggedId" style="padding-bottom: 2px;">
+	<td nowrap="nowrap" align="LEFT" width="1%" colspan="2">
+                                &nbsp;<a class="samrum-moduletitle" href="javascript:__doPostBack('ctl00$ctlPageNavigationControl$ctl00','')">Inloggning</a>
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                                                
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                                                
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="1%">
+                                &nbsp;
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                                                
+                            </td>
+</tr>
+
+                    </tbody></table>
+                    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+//]]>
+</script>
+
+                      
+                   </td>
+            </tr>
+            <tr>
+                <td valign="top" height="100%">
+                    <div class="samrum-titleareaframe">
+                        <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <td id="ctl00_tdLeftPanel1" valign="top" width="0" class="samrum-panel-left" align="center">
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        
+                                        <tbody><tr>
+                                            <td>
+                                                
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="197">
+    <tbody><tr>
+        <td width="197">
+            <table cellspacing="0" cellpadding="4" border="0" id="ctl00_LeftPanel1PlaceHolder_lgnLogin" style="border-collapse:collapse;">
+	<tbody><tr>
+		<td><table cellpadding="0" border="0" style="width:190px;">
+			<tbody><tr>
+				<td class="samrum-formvalue" align="center" style="font-weight:bold;">Ange inloggningsuppgifter</td>
+			</tr><tr>
+				<td class="samrum-formlabel"><label for="ctl00_LeftPanel1PlaceHolder_lgnLogin_UserName">Användarnamn:</label></td>
+			</tr><tr>
+				<td><input name="ctl00$LeftPanel1PlaceHolder$lgnLogin$UserName" type="text" id="ctl00_LeftPanel1PlaceHolder_lgnLogin_UserName" class="samrum-input" style="width:175px;"><span id="ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired" title="Användarnamn måste anges" class="samrum-error" style="color:Red;visibility:hidden;">*</span></td>
+			</tr><tr>
+				<td class="samrum-formlabel"><label for="ctl00_LeftPanel1PlaceHolder_lgnLogin_Password">Lösenord:</label></td>
+			</tr><tr>
+				<td><input name="ctl00$LeftPanel1PlaceHolder$lgnLogin$Password" type="password" id="ctl00_LeftPanel1PlaceHolder_lgnLogin_Password" class="samrum-input" style="width:175px;"><span id="ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired" title="Lösenord måste anges" class="samrum-error" style="color:Red;visibility:hidden;">*</span></td>
+			</tr><tr>
+				<td align="right"><input type="submit" name="ctl00$LeftPanel1PlaceHolder$lgnLogin$LoginButton" value="Logga in" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$LeftPanel1PlaceHolder$lgnLogin$LoginButton&quot;, &quot;&quot;, true, &quot;ctl00$LeftPanel1PlaceHolder$lgnLogin&quot;, &quot;&quot;, false, false))" id="ctl00_LeftPanel1PlaceHolder_lgnLogin_LoginButton" class="samrum-input"></td>
+			</tr>
+		</tbody></table></td>
+	</tr>
+</tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+
+                                
+                                <td valign="top" width="100%">
+                                    <table cellpadding="0" cellspacing="1" width="100%" height="100%">
+                                    <tbody><tr>
+                                    <td valign="top" class="samrum-workspace" width="100%">
+                                       
+<div id="ctl00_WorkAreaPlaceHolder_pnlDatabases">
+	
+        
+
+</div>
+
+                                    </td>
+                                    </tr>
+                                    </tbody></table>
+                                    
+                                </td>
+                                
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="20" background="Images/main_bot_bak.png">
+                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                        <tbody><tr>
+                            <td align="left" style="padding-left:5px;">
+                                <span id="ctl00_lblBottomLeftInformation" class="samrum-toplabel"></span>
+                            </td>
+                            <td align="center">
+                                <span id="ctl00_lblBottomCenterInformation" class="samrum-toplabel"></span>
+                            </td>
+                            <td align="right" style="padding-right:5px;">
+                                <span id="ctl00_lblBottomRightInformation" class="samrum-toplabel">SAMRUM Web 1.1.71.48</span>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+        </tbody></table>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired"), document.getElementById("ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired = document.all ? document.all["ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired"] : document.getElementById("ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired");
+ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired.controltovalidate = "ctl00_LeftPanel1PlaceHolder_lgnLogin_UserName";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired.errormessage = "Användarnamn måste anges";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired.validationGroup = "ctl00$LeftPanel1PlaceHolder$lgnLogin";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired.initialvalue = "";
+var ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired = document.all ? document.all["ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired"] : document.getElementById("ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired");
+ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired.controltovalidate = "ctl00_LeftPanel1PlaceHolder_lgnLogin_Password";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired.errormessage = "Lösenord måste anges";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired.validationGroup = "ctl00$LeftPanel1PlaceHolder$lgnLogin";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        Sys.Application.initialize();
+
+document.getElementById('ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_LeftPanel1PlaceHolder_lgnLogin_UserNameRequired'));
+}
+
+document.getElementById('ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_LeftPanel1PlaceHolder_lgnLogin_PasswordRequired'));
+}
+//]]>
+</script>
+</form>
+
+<div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><div id="claude-agent-stop-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; justify-content: center; align-items: center; pointer-events: none; z-index: 2147483647;"><button id="claude-agent-stop-button" style="position: relative; transform: translateY(0px); padding: 12px 16px; background: rgb(250, 249, 245); color: rgb(20, 20, 19); border: 0.5px solid rgba(31, 30, 29, 0.4); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: rgba(217, 119, 87, 0.24) 0px 40px 80px, rgba(217, 119, 87, 0.24) 0px 4px 14px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; user-select: none; pointer-events: auto; white-space: nowrap; margin: 0px auto;">
+      <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="margin-right: 12px; vertical-align: middle;">
+        <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
+      </svg>
+      <span style="vertical-align: middle;">Stop Claude</span>
+    </button></div></body></html>
