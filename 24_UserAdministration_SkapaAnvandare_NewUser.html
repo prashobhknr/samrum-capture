@@ -1,0 +1,459 @@
+<html xmlns="http://www.w3.org/1999/xhtml" data-lt-installed="true"><head id="ctl00_Head1"><meta http-equiv="X-UA-Compatible" content="IE=8"><title>
+	SAMRUM
+</title><link href="stylesheets/samrum.css" type="text/css" rel="stylesheet">
+    <script>
+        history.forward();
+
+        var cancelAjax = false;
+
+        function onRequestStart(ajaxManager, eventArgs) {
+            if (cancelAjax) {
+                eventArgs.EnableAjax = false;
+            }
+        }
+
+        function StopPropagation(e) {
+            //cancel bubbling  
+            e.cancelBubble = true;
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+        }  
+
+        function onButtonClicking(sender, args) {
+            var item = args.get_item();
+
+            if (item.get_attributes().getAttribute("ConfirmText") != null) {
+                if (!confirm(item.get_attributes().getAttribute("ConfirmText"))) {
+                    args.set_cancel(true);
+                }
+            }
+
+            if (item.get_attributes().getAttribute("ValidateDirty") != null) {
+                if (!CheckDirty()) {
+                    args.set_cancel(true);
+                }
+            }
+
+            if (item.get_attributes().getAttribute("ClearDirty") != null) {
+                SetDirty(false);
+            }
+
+            if (item.get_attributes().getAttribute("SetDirty") != null) {
+                SetDirty(true);
+            }
+
+            if (item.get_attributes().getAttribute("OnClickClientScript") != null) {
+                eval(item.get_attributes().getAttribute("OnClickClientScript"));
+                args.set_cancel(true);
+            }
+
+            if (item.get_attributes().getAttribute("NoAjax") != null)
+                cancelAjax = true;
+        }
+
+    </script>
+<link href="App_Themes/DefaultTheme/Grid.DefaultTheme.css" type="text/css" rel="stylesheet"><link href="App_Themes/DefaultTheme/Grid.SubList.css" type="text/css" rel="stylesheet"><link href="App_Themes/DefaultTheme/ToolBar.DefaultTheme.css" type="text/css" rel="stylesheet"><style id="claude-agent-animation-styles">
+      @keyframes claude-pulse {
+        0% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+        50% {
+          box-shadow: 
+            inset 0 0 15px rgba(217, 119, 87, 0.7),
+            inset 0 0 25px rgba(217, 119, 87, 0.5),
+            inset 0 0 35px rgba(217, 119, 87, 0.2);
+        }
+        100% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+      }
+    </style></head>
+<body>
+    <form name="aspnetForm" method="post" action="UserAdministrationPage.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJODgzMzExNjkzDxYCHg1Jc0N1cnJlbnRVc2VyaBYCZg8PFgIeCFBhZ2VNb2RlCymQAVNhbXJ1bS5HVUkuV2ViQXBwbGljYXRpb24uQmFzZVBhZ2VzLlNhbXJ1bU1hc3RlclBhZ2UrUGFnZU1vZGVzLCBTYW1ydW0uR1VJLldlYkFwcGxpY2F0aW9uLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbABkFgICAw9kFhICAw8PFgIeB1Rvb2xUaXAFEFNhbXJ1bSAxLjEuNzEuNDhkZAIFDw8WAh4EVGV4dAUKMjAyMS0wNS0wNWRkAgkPDxYCHgdWaXNpYmxlaGRkAgsPZBYEZg9kFgICAQ8PFgQeCE5vZGVUZXh0FQIJU3RhcnRzaWRhF0FkbWluaXN0cmVyYSBhbnbDpG5kYXJlHghQYWdlVHlwZQspkAFTYW1ydW0uR1VJLldlYkFwcGxpY2F0aW9uLkJhc2VQYWdlcy5TYW1ydW1NYXN0ZXJQYWdlK1BhZ2VUeXBlcywgU2FtcnVtLkdVSS5XZWJBcHBsaWNhdGlvbiwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAZBYCAgIPDxYCHwMFAyAtIGRkAgQPZBYCAgEPDxYCHwRnZGQCDw8WAh8EaBYCAgEPFgIfBGdkAhEPFgIfBGhkAhMPZBYCAgEPZBYCAgEPZBYEAgEPFCsAAhQrAAJkEBYEZgIBAgICAxYEFCsAAg9kFgIeAmlkBQt0YWJVc2VySW5mb2QUKwACD2QWAh8HBQx0YWJVc2VyUm9sZXNkFCsAAg9kFgIfBwUUdGFiTW9kdWxlUGVybWlzc2lvbnNkFCsAAg8WAh8EaBYCHwcFC3RhYlByb2plY3RzZA8WBGZmZmYWAQVvVGVsZXJpay5XZWIuVUkuUmFkVGFiLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ZBYIZg8PZBYCHwcFC3RhYlVzZXJJbmZvZAIBDw9kFgIfBwUMdGFiVXNlclJvbGVzZAICDw9kFgIfBwUUdGFiTW9kdWxlUGVybWlzc2lvbnNkAgMPDxYCHwRoFgIfBwULdGFiUHJvamVjdHNkAgMPFCsAAmQVBBJycHZVc2VySW5mb3JtYXRpb24McnB2VXNlclJvbGVzFHJwdk1vZHVsZVBlcm1pc3Npb25zC3JwdlByb2plY3RzZAIVD2QWBAIBDxYCHwRnZAIDD2QWAgIDDw8WBB4Jc2hvd1JvbGVzZx4MSXNNYXN0ZXJNb2RlZGQWAgICD2QWAgIBD2QWAmYPZBYCZg9kFgICAQ88KwANAgAUKwABDxYIHgtfIURhdGFCb3VuZGceF0VuYWJsZUFqYXhTa2luUmVuZGVyaW5naB4LRWRpdEluZGV4ZXMWAB4LXyFJdGVtQ291bnQCAWQBFgIWCg8CAxQrAAMUKwAFFggfBGceBG9pbmQCAh4EX2R0ZgUFVVNfSUQeA19zZQUFVVNfSURkZGQFClNob3dDb2x1bW4UKwAFFgYeCURhdGFGaWVsZAULVVNfVXNlck5hbWUfEAULVVNfVXNlck5hbWUfDgIDZGRkBQ5Vc2VyTmFtZUNvbHVtbhQrAAUWCB8RBRNVUl9Vc2VyRnJpZW5kbHlOYW1lHxAFE1VSX1VzZXJGcmllbmRseU5hbWUfBGcfDgIEZGRkBQ9Vc2VyUm9sZXNDb2x1bW5kZRQrAAALKXpUZWxlcmlrLldlYi5VSS5HcmlkQ2hpbGRMb2FkTW9kZSwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAwOC4zLjExMjUuMzUsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNAE8KwAHAAspdVRlbGVyaWsuV2ViLlVJLkdyaWRFZGl0TW9kZSwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAwOC4zLjExMjUuMzUsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNAFkZBYMHgVfZGtucxUBBVVTX0lEHwpnHw0CGR4FX3FlbHQZKWdTeXN0ZW0uRGF0YS5EYXRhUm93VmlldywgU3lzdGVtLkRhdGEsIFZlcnNpb249Mi4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5HghEYXRhS2V5cxYAHgVfIUNJUxcAZhYCZg8UKwADD2QWAh4Fc3R5bGUFC3dpZHRoOjEwMCU7ZGRkAhsPDxYCHwMFFFNBTVJVTSBXZWIgMS4xLjcxLjQ4ZGQYBQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgQFL2N0bDAwJFdvcmtBcmVhUGxhY2VIb2xkZXIkcm1wVXNlckFkbWluaXN0cmF0aW9uBQ9jdGwwMCRidG5Mb2dvdXQFG2N0bDAwJGJ0bk1pbmltaXplUmlnaHRQYW5lbAUvY3RsMDAkUmlnaHRQYW5lbFBsYWNlSG9sZGVyJHVjVXNlckxpc3QkbHN0VXNlcnMFNWN0bDAwJFJpZ2h0UGFuZWxQbGFjZUhvbGRlciR1Y1VzZXJMaXN0JGxzdFVzZXJzJGN0bDAwDxQrAAMUKwACZBcEBQhfIVBDb3VudAIDBQtfIUl0ZW1Db3VudAIZBRBDdXJyZW50UGFnZUluZGV4ZgUGXyFEU0lDAjoWAh8QFgQeAl9jAgEeATAWBB4DX2ZuBQtVU19Vc2VyTmFtZR4DX3NvCyl2VGVsZXJpay5XZWIuVUkuR3JpZFNvcnRPcmRlciwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAwOC4zLjExMjUuMzUsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNAEUKwAZFCsAAhQrAAEFBVVTX0lEFCsAAQJXFCsAAhQrAAEFBVVTX0lEFCsAAQJVFCsAAhQrAAEFBVVTX0lEFCsAAQJUFCsAAhQrAAEFBVVTX0lEFCsAAQJtFCsAAhQrAAEFBVVTX0lEFCsAAQJOFCsAAhQrAAEFBVVTX0lEFCsAAQJ3FCsAAhQrAAEFBVVTX0lEFCsAAQJsFCsAAhQrAAEFBVVTX0lEFCsAAQJ2FCsAAhQrAAEFBVVTX0lEFCsAAQJRFCsAAhQrAAEFBVVTX0lEFCsAAQJLFCsAAhQrAAEFBVVTX0lEFCsAAQJjFCsAAhQrAAEFBVVTX0lEFCsAAQJyFCsAAhQrAAEFBVVTX0lEFCsAAQJ0FCsAAhQrAAEFBVVTX0lEFCsAAQJzFCsAAhQrAAEFBVVTX0lEFCsAAQJfFCsAAhQrAAEFBVVTX0lEFCsAAQJnFCsAAhQrAAEFBVVTX0lEFCsAAQJlFCsAAhQrAAEFBVVTX0lEFCsAAQJoFCsAAhQrAAEFBVVTX0lEFCsAAQJrFCsAAhQrAAEFBVVTX0lEFCsAAQJiFCsAAhQrAAEFBVVTX0lEFCsAAQJpFCsAAhQrAAEFBVVTX0lEFCsAAQJqFCsAAhQrAAEFBVVTX0lEFCsAAQJvFCsAAhQrAAEFBVVTX0lEFCsAAQJhFCsAAhQrAAEFBVVTX0lEFCsAAQJxZAUvY3RsMDAkUmlnaHRQYW5lbFBsYWNlSG9sZGVyJHVjVXNlckxpc3QkbHN0VXNlcnMPFCsAAmQXAQUPU2VsZWN0ZWRJbmRleGVzFgBkBStjdGwwMCRXb3JrQXJlYVBsYWNlSG9sZGVyJG12QWRtaW5pc3RlclVzZXJzDw9kZmQFJGN0bDAwJFdvcmtBcmVhUGxhY2VIb2xkZXIkbXZFZGl0VXNlcg8PZGZkNOiYbSjpdOaSeLqPKJY9aYJHRC4=">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=3aQh7nnt2KGmeju4sNRz9aKoQ2SEOfifbRJpgYKZzW4pTqVk6cV0fPyJwOrOYDqXWcJnUo-72PzPx0O26qTDccvtlBg1&amp;t=639088132438931106" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=BLHkt042gM7IG9aXGGfgYceSGOOHE3fo4LvoxNO_bcuHMpl8FwcXDHdsc1x_HPa0IbyMO2TmShLWWAYBiNaiKxTHh2rPl773N1tGQtgDTQJiAFXrc2GtxiDZ7qaJiQHN4oaTtsf0UNKmqKgYrIghWh4ygzs1&amp;t=ffffffffe8c5bfb1" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=8o85MZh4LOkSMZ0-Pnenkm2WJ0rvX-4VZbBJRZ-2ILoCKuR5wrsO_VebmjZwEG4SyAfyz6LLIi2PX0MKX_CZfDfJd26aBMrqIAYecE1r2qnpHBlPiK6Dy7JoAzSNEz-2xjQYUqrmv9l1BYJ15oNGNEgqvUiW5RznSoSDRhNSrRU1oHal0&amp;t=ffffffffa50b82b2" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=il2zGEi7rxlOsHvmkApw2pfG6ovRtFaOnkECdrgedCYqKwAj1SvDaaHYeZdOSrWktnMQDQdRpzqeRNi5I4xQqPyuX6ck6Zzs3ykhAfnBHR8vYzgZpManPy3PH6dNXoULY80LYzo48LtorxTwgjhIVAnPxfFczWrJlw3g-4affmtNkYNK0&amp;t=ffffffffa50b82b2" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=GKkbrh0nulHUDm3ZGwoNTM_z2kWF5JwT_-bAAyvSwrSof1tFrLw0X1ckFcB5K2Jq_2yhvtffLow6M9g0iiuKsE6EqLYYhA308VRRznaGp9imx1_YPanmymZxQMnuJoqZp9f_xg2&amp;t=20216ac0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=djXh44fGZe3-CcmxBGk7EYOsTQIzN-6WYfWKCVyeMsCt8pavymEgHR71tunE23E0XMR6vMgrZ91IQ_N0nRD29p1Lp-qSiFBrQgHWOu6h-vxVoCWAlwJ4r8C7ywI-UWIvVV0agA2&amp;t=20216ac0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=wIzF4X9DKRbnEVD-0Sswz3KFmO3zqLQfTph2K2CQgRmuR9vQ7_EglLZEOWk8am5o2QBbuOPKDDzCk--Ct-ITesuB7yWDEfmQu0KWg6G4UqBSht0xsCgjqM-bWyyYK8OEFb4aZACYNhg9z21dybEva-W4PWk1&amp;t=20216ac0" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="F2B35C21">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWLQLIoNrCBAK+nYa6CgKQnaOCAwKQnbfdCwL7wLXEBQKezO3BDgKmrpTvAwLGiamwCAL+0MKEAgLYmZ3HCQKzyqOCBQKT1ZCuDwKSnJSbDwKthbKwCQLI7s/FAwLj1+3aDQKhr/VBAsOmqMENAqi9iqwDAvLqzoEPAtncm+8FAuPX1JMMAsXmqaYJAo3iwfQHApenqN0DAtnct5cGAuPX8LsMAsXmxc4JAo3irZQJApenlP0EAtnco7cHAuPX3NsNAsXmse4KAo3iqawHApenkJUDAtncn88FAuPX2PMLAsXmrYYJAo3i1dwIApenvMUEAtncy/8GAuPXhKQNAsXm2bYKAo3isfQIApenmN0El7AvK/QOBbPFDoTUnFYyeO9YK8w=">
+</div>
+        <table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%">
+            <tbody><tr>
+                <td class="samrum-topareaframe">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody><tr>
+                            <td align="left" width="1%" nowrap="">
+                                <img id="ctl00_Image1" src="Images/main_top_bak.png" style="border-width:0px;">
+                                <a id="ctl00_lnkLogo" title="Samrum 1.1.71.48" href="./"><img title="Samrum 1.1.71.48" src="Images/logo_main.png" style="border-width:0px;"></a>
+                            </td>                                
+                            <td width="97%" nowrap="" valign="middle">
+                                <span id="ctl00_lblProjectName" class="samrum-toplabel">2021-05-05</span>
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td valign="middle" align="right" width="1%" nowrap="">
+                                <input type="image" name="ctl00$btnLogout" id="ctl00_btnLogout" onmouseover="this.src='/Images/Out_2.png';" onmouseout="this.src='/Images/Out_1.png';" src="Images/Out_1.png" alt="Logga ut från Samrum" onclick="return confirm('Du håller på att logga ut.');WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$btnLogout&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" style="border-width:0px;">&nbsp;
+                                
+                            </td>
+                        </tr>
+                        <tr id="ctl00_trLoggedId" style="padding-bottom: 2px;">
+	<td nowrap="nowrap" align="LEFT" width="1%" colspan="2">
+                                &nbsp;<a class="samrum-moduletitle" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ctlPageNavigationControl$ctl00&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">Startsida</a><span class="samrum-moduletitle"> - </span><a class="samrum-moduletitle" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ctlPageNavigationControl$ctl01&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">Administrera användare</a>
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                                                
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                                                
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="1%">
+                                <a id="ctl00_lnkDatabaseAdministration" class="samrum-toplink" href="javascript:__doPostBack('ctl00$lnkDatabaseAdministration','')">Databasadministration</a>&nbsp;
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                <a id="ctl00_lnkMyProfile" class="samrum-toplink" href="javascript:__doPostBack('ctl00$lnkMyProfile','')">Mina uppgifter</a>                                
+                            </td>
+</tr>
+
+                    </tbody></table>
+                    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tctl00$RightPanelPlaceHolder$ucUserList$ctl00$RightPanelPlaceHolder$ucUserList$RadAjaxPanel2Panel'], [], [], 90);
+//]]>
+</script>
+
+                      
+                   </td>
+            </tr>
+            <tr>
+                <td valign="top" height="100%">
+                    <div class="samrum-titleareaframe">
+                        <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                
+                                
+                                <td valign="top" width="100%">
+                                    <table cellpadding="0" cellspacing="1" width="100%" height="100%">
+                                    <tbody><tr>
+                                    <td valign="top" class="samrum-workspace" width="100%">
+                                    
+    
+            <br>
+            <span style="font-size: 16px;">Skapa ny användare</span><br>
+            <br>
+            <span style="width: 100px">Användarnamn</span>
+            <input name="ctl00$WorkAreaPlaceHolder$tbNewUserName" type="text" id="ctl00_WorkAreaPlaceHolder_tbNewUserName" style="width:200px;">
+            <span id="ctl00_WorkAreaPlaceHolder_cvNewUserName" style="color:Red;display:none;">*</span>
+            <span id="ctl00_WorkAreaPlaceHolder_rfvNewUserName" style="color:Red;display:none;">*</span>
+            <br>
+            <span style="width: 100px">E-post</span>
+            <input name="ctl00$WorkAreaPlaceHolder$tbNewUserEmail" type="text" id="ctl00_WorkAreaPlaceHolder_tbNewUserEmail" style="width:200px;"><span id="ctl00_WorkAreaPlaceHolder_cvNewUserEmail" style="color:Red;display:none;">*</span><span id="ctl00_WorkAreaPlaceHolder_rfvNewUserEmail" style="color:Red;display:none;">*</span>
+            <br>
+            <span id="ctl00_WorkAreaPlaceHolder_Label2" style="display:inline-block;width:100px;">Lösenord</span>
+            <input name="ctl00$WorkAreaPlaceHolder$tbNewPassword" type="text" id="ctl00_WorkAreaPlaceHolder_tbNewPassword" style="width:200px;"><span id="ctl00_WorkAreaPlaceHolder_rfvPw" style="color:Red;display:none;">*</span>
+            <br>
+            <div id="ctl00_WorkAreaPlaceHolder_vsSummary" style="color:Red;display:none;">
+
+</div>
+            <br>
+            <span style="margin-left: 155px">
+                <input type="submit" name="ctl00$WorkAreaPlaceHolder$btnCreateUser" value="Skapa användare" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$WorkAreaPlaceHolder$btnCreateUser&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl00_WorkAreaPlaceHolder_btnCreateUser"></span>
+        
+
+                                    </td>
+                                    </tr>
+                                    </tbody></table>
+                                    
+                                </td>
+                                <td id="ctl00_tdRightPanel" valign="top" width="0" class="samrum-panel-right" align="center">                                          
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tbody><tr id="ctl00_trToggleRightPanel">
+	<td align="left" style="padding-top:1px;">
+                                                
+                                                <input type="image" name="ctl00$btnMinimizeRightPanel" id="ctl00_btnMinimizeRightPanel" onmouseover="this.src='/Images/arrow_r_2.png';" onmouseout="this.src='/Images/arrow_r.png';" src="Images/arrow_r.png" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$btnMinimizeRightPanel&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" style="border-width:0px;">
+                                            </td>
+</tr>
+
+                                        <tr>
+                                            <td>
+                                                
+    <a id="ctl00_RightPanelPlaceHolder_btnNewUser" class="right samrum-formlink" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$RightPanelPlaceHolder$btnNewUser&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">Ny användare</a>
+    <div id="ctl00_RightPanelPlaceHolder_ucUserList_pnlLoadingPanel1" style="display:none;background-color:#E0E0E0;">
+	
+    <img id="ctl00_RightPanelPlaceHolder_ucUserList_imgLoadingPanelImage" src="Images/Loading/Loading6.gif" style="border-width:0px;margin-top: 70px;">
+
+</div>
+
+<div id="ctl00_RightPanelPlaceHolder_ucUserList_ctl00_RightPanelPlaceHolder_ucUserList_RadAjaxPanel2Panel">
+	<div id="ctl00_RightPanelPlaceHolder_ucUserList_RadAjaxPanel2">
+		<!-- 2008.3.1125.35 -->
+<table id="ctl00_RightPanelPlaceHolder_ucUserList_tblUsers" border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td align="left">
+            <div id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers" class="RadGrid RadGrid_DefaultTheme" style="width:100%;" tabindex="0">
+
+				<table class="MasterTable_DefaultTheme" cellspacing="0" border="0" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00" style="width:100%;border-collapse:collapse;table-layout:fixed;overflow:hidden;empty-cells:show;">
+	<colgroup>
+		<col width="35px">
+		<col width="200px">
+		<col width="200px">
+	</colgroup>
+<thead>
+		<tr>
+			<th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl02$ctl01$ctl00','')">&nbsp;</a></th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl02$ctl01$ctl01','')">Användarnamn</a>&nbsp;<input type="button" name="ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl02$ctl01$ctl02" value=" " onclick="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl02$ctl01$ctl02','')" title="Sorterar stigande" class="rgSortAsc"></th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl02$ctl01$ctl03','')">Roller</a></th>
+		</tr>
+	</thead><tfoot>
+		<tr class="GridPager_DefaultTheme">
+			<td colspan="3"><div class="PagerLeft_DefaultTheme">
+				<span><input type="button" name="ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl03$ctl01$ctl02" value=" " onclick="return false;WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl03$ctl01$ctl02&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))" title="Gå till föregående sida" class="rgPagePrev"></span>&nbsp;<span>1</span>&nbsp;<a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl03$ctl01$ctl04','')">2</a>&nbsp;<a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl03$ctl01$ctl05','')">3</a>&nbsp;<span><input type="button" name="ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl03$ctl01$ctl07" value=" " onclick="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl03$ctl01$ctl07','')" title="Gå till nästa sida" class="rgPageNext"></span>
+			</div></td>
+		</tr>
+	</tfoot><tbody>
+	<tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__0">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl04$ctl00','')">Visa</a></td><td>Anders Lundgren</td><td>Administratör av fördefinierade poster, Administratör av rapportvyer, Användaradministratör, projekt, Databasadministratör, Import/Export-Definitionsadministratör, Utvecklare</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__1">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl06$ctl00','')">Visa</a></td><td>Avd.ansvarig</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__2">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl08$ctl00','')">Visa</a></td><td>Beställare</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__3">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl10$ctl00','')">Visa</a></td><td>Brel0034</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__4">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl12$ctl00','')">Visa</a></td><td>BrMs</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__5">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl14$ctl00','')">Visa</a></td><td>Brskdok</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__6">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl16$ctl00','')">Visa</a></td><td>Brskk0912</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__7">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl18$ctl00','')">Visa</a></td><td>Brskrum</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__8">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl20$ctl00','')">Visa</a></td><td>DaMÅ</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__9">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl22$ctl00','')">Visa</a></td><td>Danne</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__10">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl24$ctl00','')">Visa</a></td><td>DBR10</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__11">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl26$ctl00','')">Visa</a></td><td>Deka</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__12">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl28$ctl00','')">Visa</a></td><td>Dekl</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__13">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl30$ctl00','')">Visa</a></td><td>Dekm</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__14">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl32$ctl00','')">Visa</a></td><td>DFP16</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__15">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl34$ctl00','')">Visa</a></td><td>Dgglas</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__16">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl36$ctl00','')">Visa</a></td><td>Dglas</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__17">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl38$ctl00','')">Visa</a></td><td>Dgljud</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__18">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl40$ctl00','')">Visa</a></td><td>Dgpass</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__19">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl42$ctl00','')">Visa</a></td><td>Dgr</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__20">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl44$ctl00','')">Visa</a></td><td>Dgsäk</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__21">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl46$ctl00','')">Visa</a></td><td>Dgtillg</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__22">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl48$ctl00','')">Visa</a></td><td>Dink</td><td>&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__23">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl50$ctl00','')">Visa</a></td><td>Dkan</td><td>&nbsp;</td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00__24">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00$ctl52$ctl00','')">Visa</a></td><td>Dlevd</td><td>&nbsp;</td>
+	</tr>
+	</tbody>
+
+</table><input id="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ClientState" name="ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ClientState" type="hidden" autocomplete="off">
+					</div>
+				            
+        </td>
+			</tr>
+		</tbody></table>
+		
+
+
+	</div>
+</div>
+
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="20" background="Images/main_bot_bak.png">
+                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                        <tbody><tr>
+                            <td align="left" style="padding-left:5px;">
+                                <span id="ctl00_lblBottomLeftInformation" class="samrum-toplabel"></span>
+                            </td>
+                            <td align="center">
+                                <span id="ctl00_lblBottomCenterInformation" class="samrum-toplabel"></span>
+                            </td>
+                            <td align="right" style="padding-right:5px;">
+                                <span id="ctl00_lblBottomRightInformation" class="samrum-toplabel">SAMRUM Web 1.1.71.48</span>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+        </tbody></table>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("ctl00_WorkAreaPlaceHolder_vsSummary"));
+var Page_Validators =  new Array(document.getElementById("ctl00_WorkAreaPlaceHolder_cvNewUserName"), document.getElementById("ctl00_WorkAreaPlaceHolder_rfvNewUserName"), document.getElementById("ctl00_WorkAreaPlaceHolder_cvNewUserEmail"), document.getElementById("ctl00_WorkAreaPlaceHolder_rfvNewUserEmail"), document.getElementById("ctl00_WorkAreaPlaceHolder_rfvPw"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl00_WorkAreaPlaceHolder_cvNewUserName = document.all ? document.all["ctl00_WorkAreaPlaceHolder_cvNewUserName"] : document.getElementById("ctl00_WorkAreaPlaceHolder_cvNewUserName");
+ctl00_WorkAreaPlaceHolder_cvNewUserName.controltovalidate = "ctl00_WorkAreaPlaceHolder_tbNewUserName";
+ctl00_WorkAreaPlaceHolder_cvNewUserName.display = "Dynamic";
+ctl00_WorkAreaPlaceHolder_cvNewUserName.evaluationfunction = "CustomValidatorEvaluateIsValid";
+var ctl00_WorkAreaPlaceHolder_rfvNewUserName = document.all ? document.all["ctl00_WorkAreaPlaceHolder_rfvNewUserName"] : document.getElementById("ctl00_WorkAreaPlaceHolder_rfvNewUserName");
+ctl00_WorkAreaPlaceHolder_rfvNewUserName.controltovalidate = "ctl00_WorkAreaPlaceHolder_tbNewUserName";
+ctl00_WorkAreaPlaceHolder_rfvNewUserName.errormessage = "Du måste ange ett användarnamn";
+ctl00_WorkAreaPlaceHolder_rfvNewUserName.display = "Dynamic";
+ctl00_WorkAreaPlaceHolder_rfvNewUserName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_WorkAreaPlaceHolder_rfvNewUserName.initialvalue = "";
+var ctl00_WorkAreaPlaceHolder_cvNewUserEmail = document.all ? document.all["ctl00_WorkAreaPlaceHolder_cvNewUserEmail"] : document.getElementById("ctl00_WorkAreaPlaceHolder_cvNewUserEmail");
+ctl00_WorkAreaPlaceHolder_cvNewUserEmail.controltovalidate = "ctl00_WorkAreaPlaceHolder_tbNewUserEmail";
+ctl00_WorkAreaPlaceHolder_cvNewUserEmail.display = "Dynamic";
+ctl00_WorkAreaPlaceHolder_cvNewUserEmail.evaluationfunction = "CustomValidatorEvaluateIsValid";
+var ctl00_WorkAreaPlaceHolder_rfvNewUserEmail = document.all ? document.all["ctl00_WorkAreaPlaceHolder_rfvNewUserEmail"] : document.getElementById("ctl00_WorkAreaPlaceHolder_rfvNewUserEmail");
+ctl00_WorkAreaPlaceHolder_rfvNewUserEmail.controltovalidate = "ctl00_WorkAreaPlaceHolder_tbNewUserEmail";
+ctl00_WorkAreaPlaceHolder_rfvNewUserEmail.errormessage = "Du måste ange en epostadress";
+ctl00_WorkAreaPlaceHolder_rfvNewUserEmail.display = "Dynamic";
+ctl00_WorkAreaPlaceHolder_rfvNewUserEmail.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_WorkAreaPlaceHolder_rfvNewUserEmail.initialvalue = "";
+var ctl00_WorkAreaPlaceHolder_rfvPw = document.all ? document.all["ctl00_WorkAreaPlaceHolder_rfvPw"] : document.getElementById("ctl00_WorkAreaPlaceHolder_rfvPw");
+ctl00_WorkAreaPlaceHolder_rfvPw.controltovalidate = "ctl00_WorkAreaPlaceHolder_tbNewPassword";
+ctl00_WorkAreaPlaceHolder_rfvPw.errormessage = "Du måste ange ett lösenord";
+ctl00_WorkAreaPlaceHolder_rfvPw.display = "Dynamic";
+ctl00_WorkAreaPlaceHolder_rfvPw.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_WorkAreaPlaceHolder_rfvPw.initialvalue = "";
+var ctl00_WorkAreaPlaceHolder_vsSummary = document.all ? document.all["ctl00_WorkAreaPlaceHolder_vsSummary"] : document.getElementById("ctl00_WorkAreaPlaceHolder_vsSummary");
+ctl00_WorkAreaPlaceHolder_vsSummary.headertext = "<br />Användaren kunde inte skapas:";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+document.getElementById('ctl00_WorkAreaPlaceHolder_vsSummary').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('ctl00_WorkAreaPlaceHolder_vsSummary'));
+}
+Sys.Application.initialize();
+
+document.getElementById('ctl00_WorkAreaPlaceHolder_cvNewUserName').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_WorkAreaPlaceHolder_cvNewUserName'));
+}
+
+document.getElementById('ctl00_WorkAreaPlaceHolder_rfvNewUserName').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_WorkAreaPlaceHolder_rfvNewUserName'));
+}
+
+document.getElementById('ctl00_WorkAreaPlaceHolder_cvNewUserEmail').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_WorkAreaPlaceHolder_cvNewUserEmail'));
+}
+
+document.getElementById('ctl00_WorkAreaPlaceHolder_rfvNewUserEmail').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_WorkAreaPlaceHolder_rfvNewUserEmail'));
+}
+
+document.getElementById('ctl00_WorkAreaPlaceHolder_rfvPw').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_WorkAreaPlaceHolder_rfvPw'));
+}
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxLoadingPanel, {"initialDelayTime":0,"isSticky":false,"minDisplayTime":0,"transparency":50,"uniqueID":"ctl00$RightPanelPlaceHolder$ucUserList$pnlLoadingPanel1","zIndex":90000}, null, null, $get("ctl00_RightPanelPlaceHolder_ucUserList_pnlLoadingPanel1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadGrid, {"ClientID":"ctl00_RightPanelPlaceHolder_ucUserList_lstUsers","ClientSettings":{"EnableRowHoverStyle":true,"ColumnsReorderMethod":1,"ShouldCreateRows":true,"ReorderColumnsOnClient":true,"DataBinding":{},"Selecting":{"AllowRowSelect":true},"Scrolling":{},"Resizing":{"AllowColumnResize":true,"ClipCellContentOnResize":true,"EnableRealTimeResize":true,"ResizeGridOnColumnResize":true},"ClientMessages":{}},"Skin":"DefaultTheme","UniqueID":"ctl00$RightPanelPlaceHolder$ucUserList$lstUsers","_activeRowIndex":"","_controlToFocus":"","_currentPageIndex":0,"_editIndexes":"[]","_embeddedSkin":false,"_gridTableViewsData":"[{\"ClientID\":\"ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00\",\"UniqueID\":\"ctl00$RightPanelPlaceHolder$ucUserList$lstUsers$ctl00\",\"PageSize\":25,\"PageCount\":3,\"EditMode\":\"EditForms\",\"CurrentPageIndex\":0,\"VirtualItemCount\":0,\"AllowMultiColumnSorting\":false,\"IsItemInserted\":false,\"clientDataKeyNames\":[],\"_dataBindTemplates\":false,\"_selectedItemStyle\":\"\",\"_selectedItemStyleClass\":\"SelectedRow_DefaultTheme\",\"_columnsData\":[{\"UniqueName\":\"ShowColumn\",\"Resizable\":false,\"Reorderable\":true,\"Groupable\":false,\"ColumnType\":\"GridButtonColumn\",\"Display\":true},{\"UniqueName\":\"UserNameColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"UserRolesColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true}]}]","_masterClientID":"ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ctl00","allowMultiRowSelection":false,"clientStateFieldID":"ctl00_RightPanelPlaceHolder_ucUserList_lstUsers_ClientState"}, null, null, $get("ctl00_RightPanelPlaceHolder_ucUserList_lstUsers"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxPanel, {"clientEvents":{OnRequestStart:"",OnResponseEnd:""},"enableAJAX":true,"enableHistory":false,"links":[],"loadingPanelID":"ctl00_RightPanelPlaceHolder_ucUserList_pnlLoadingPanel1","styles":[],"uniqueID":"ctl00$RightPanelPlaceHolder$ucUserList$RadAjaxPanel2"}, null, null, $get("ctl00_RightPanelPlaceHolder_ucUserList_RadAjaxPanel2"));
+});
+//]]>
+</script>
+</form>
+
+<div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><div id="claude-agent-stop-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); justify-content: center; align-items: center; pointer-events: none; z-index: 2147483647;"><button id="claude-agent-stop-button" style="position: relative; transform: translateY(0px); padding: 12px 16px; background: rgb(250, 249, 245); color: rgb(20, 20, 19); border: 0.5px solid rgba(31, 30, 29, 0.4); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: rgba(217, 119, 87, 0.24) 0px 40px 80px, rgba(217, 119, 87, 0.24) 0px 4px 14px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; user-select: none; pointer-events: auto; white-space: nowrap; margin: 0px auto;">
+      <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="margin-right: 12px; vertical-align: middle;">
+        <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
+      </svg>
+      <span style="vertical-align: middle;">Stop Claude</span>
+    </button></div></body></html>
