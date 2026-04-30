@@ -1,0 +1,67 @@
+<html data-lt-installed="true"><head>
+  <title>SAMRUM Hjälp</title>
+  <meta name="Robots" content="noindex">
+<script type="text/javascript" language="JavaScript">
+<!--
+
+// ensure page is not loaded inside another frame
+if (top.location != self.location) {top.location = self.location;} 
+
+
+//-- eg. hh_start.htm#index2.htm                -- sets the content frame only
+//-- eg. hh_start.htm#index2.htm+hh_search.htm  -- sets the content and nav frame
+//-- eg. hh_start.htm#+hh_search.htm            -- sets the nav frame only
+var LFile="hh_toc.htm";
+var RFile="Default.htm";
+var Param=window.location.hash.substring(1);
+var Params=Param.split("+");
+if (Param != "") {
+  if ((Params.length == 2) && (Params[1] != "")) LFile=Params[1];
+  if (Params[0] != "") RFile=Params[0];
+}
+
+//debug line
+//alert('LFile='+ LFile + ', RFile='+RFile);
+
+document.write('<frameset cols="263,100%" framespacing="3">');
+document.write('  <frame src="'+LFile+'" name="left" scrolling="no" frameborder="0" />');
+document.write('  <frame src="'+RFile+'" name="right" scrolling="auto" frameborder="1" />');
+document.write('    <noframes>');
+document.write('      <body>');
+document.write('      <p>This page uses frames, but your browser does not support frames.</p>');
+document.write('      </body>');
+document.write('    </noframes>');
+document.write('</frameset>');
+
+//-->
+</script><style id="claude-agent-animation-styles">
+      @keyframes claude-pulse {
+        0% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+        50% {
+          box-shadow: 
+            inset 0 0 15px rgba(217, 119, 87, 0.7),
+            inset 0 0 25px rgba(217, 119, 87, 0.5),
+            inset 0 0 35px rgba(217, 119, 87, 0.2);
+        }
+        100% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+      }
+    </style></head>
+
+<frameset cols="263,100%" framespacing="3">  <frame src="hh_toc.htm" name="left" scrolling="no" frameborder="0">  <frame src="Default.htm" name="right" scrolling="auto" frameborder="1">    <noframes>      <body>      <p>This page uses frames, but your browser does not support frames.</p>      </body>    </noframes><div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><div id="claude-agent-stop-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); justify-content: center; align-items: center; pointer-events: none; z-index: 2147483647;"><button id="claude-agent-stop-button" style="position: relative; transform: translateY(0px); padding: 12px 16px; background: rgb(250, 249, 245); color: rgb(20, 20, 19); border: 0.5px solid rgba(31, 30, 29, 0.4); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: rgba(217, 119, 87, 0.24) 0px 40px 80px, rgba(217, 119, 87, 0.24) 0px 4px 14px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; user-select: none; pointer-events: auto; white-space: nowrap; margin: 0px auto;">
+      <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="margin-right: 12px; vertical-align: middle;">
+        <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
+      </svg>
+      <span style="vertical-align: middle;">Stop Claude</span>
+    </button></div></frameset>
+
+</html>
