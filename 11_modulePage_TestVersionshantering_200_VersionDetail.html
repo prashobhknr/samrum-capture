@@ -1,0 +1,640 @@
+<html xmlns="http://www.w3.org/1999/xhtml" data-lt-installed="true"><head id="ctl00_Head1"><meta http-equiv="X-UA-Compatible" content="IE=8"><title>
+	SAMRUM
+</title><link href="stylesheets/samrum.css" type="text/css" rel="stylesheet">
+    <script>
+        history.forward();
+
+        var cancelAjax = false;
+
+        function onRequestStart(ajaxManager, eventArgs) {
+            if (cancelAjax) {
+                eventArgs.EnableAjax = false;
+            }
+        }
+
+        function StopPropagation(e) {
+            //cancel bubbling  
+            e.cancelBubble = true;
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+        }  
+
+        function onButtonClicking(sender, args) {
+            var item = args.get_item();
+
+            if (item.get_attributes().getAttribute("ConfirmText") != null) {
+                if (!confirm(item.get_attributes().getAttribute("ConfirmText"))) {
+                    args.set_cancel(true);
+                }
+            }
+
+            if (item.get_attributes().getAttribute("ValidateDirty") != null) {
+                if (!CheckDirty()) {
+                    args.set_cancel(true);
+                }
+            }
+
+            if (item.get_attributes().getAttribute("ClearDirty") != null) {
+                SetDirty(false);
+            }
+
+            if (item.get_attributes().getAttribute("SetDirty") != null) {
+                SetDirty(true);
+            }
+
+            if (item.get_attributes().getAttribute("OnClickClientScript") != null) {
+                eval(item.get_attributes().getAttribute("OnClickClientScript"));
+                args.set_cancel(true);
+            }
+
+            if (item.get_attributes().getAttribute("NoAjax") != null)
+                cancelAjax = true;
+        }
+
+    </script>
+<link href="App_Themes/DefaultTheme/Grid.DefaultTheme.css" type="text/css" rel="stylesheet"><link href="App_Themes/DefaultTheme/Grid.SubList.css" type="text/css" rel="stylesheet"><link href="App_Themes/DefaultTheme/ToolBar.DefaultTheme.css" type="text/css" rel="stylesheet"><link href="/WebResource.axd?d=_jpq6818mfaSGdOAO7lIW9JiXcrVrza6p3mXJskBtJrhV8V20HWS91SST5tBWGp-J2cGJTq9bPMGRVphdqElaola5-i2R7cxt03P1Cmv5wLyfZjW_nxZReuYB2zKuZYoI00WBN5x82PW_TwabTExEo0japk1&amp;t=634873707400000000" type="text/css" rel="stylesheet" class="Telerik_stylesheet"><style type="text/css">
+	.ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_0 { background-color:white;visibility:hidden;display:none;position:absolute;left:0px;top:0px; }
+	.ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_1 { text-decoration:none; }
+	.ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_2 {  }
+
+</style><style id="claude-agent-animation-styles">
+      @keyframes claude-pulse {
+        0% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+        50% {
+          box-shadow: 
+            inset 0 0 15px rgba(217, 119, 87, 0.7),
+            inset 0 0 25px rgba(217, 119, 87, 0.5),
+            inset 0 0 35px rgba(217, 119, 87, 0.2);
+        }
+        100% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+      }
+    </style></head>
+<body>
+    <form name="aspnetForm" method="post" action="modulePage.aspx?ProjectModuleId=200" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTg2MDg2NDA3OA8WBh4PUHJvamVjdE1vZHVsZUlkAsgBHgtEaXNwbGF5TW9kZQspgwFTYW1ydW0uR1VJLldlYkFwcGxpY2F0aW9uLk1vZHVsZVBhZ2UrRGlzcGxheU1vZGVzLCBTYW1ydW0uR1VJLldlYkFwcGxpY2F0aW9uLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAMeFExlZnRQYW5lbERpc3BsYXlNb2RlCymMAVNhbXJ1bS5HVUkuV2ViQXBwbGljYXRpb24uTW9kdWxlUGFnZStMZWZ0UGFuZWxEaXNwbGF5TW9kZXMsIFNhbXJ1bS5HVUkuV2ViQXBwbGljYXRpb24sIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsARYCZg8PFgIeCFBhZ2VNb2RlCymQAVNhbXJ1bS5HVUkuV2ViQXBwbGljYXRpb24uQmFzZVBhZ2VzLlNhbXJ1bU1hc3RlclBhZ2UrUGFnZU1vZGVzLCBTYW1ydW0uR1VJLldlYkFwcGxpY2F0aW9uLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbABkFgICAw9kFhQCAw8PFgIeB1Rvb2xUaXAFEFNhbXJ1bSAxLjEuNzEuNDhkZAIFDw8WAh4EVGV4dAUKMjAyMS0wNS0wNWRkAgkPDxYEHwUFEUVqIGlubG9nZ2FkJm5ic3A7HgdWaXNpYmxlaGRkAgsPZBYEZg9kFgICAQ8PFgQeCE5vZGVUZXh0FQIJU3RhcnRzaWRhHlRlc3QgdmVyc2lvbnNoYW50ZXJpbmcgKE1vZHVsKR4IUGFnZVR5cGULKZABU2FtcnVtLkdVSS5XZWJBcHBsaWNhdGlvbi5CYXNlUGFnZXMuU2FtcnVtTWFzdGVyUGFnZStQYWdlVHlwZXMsIFNhbXJ1bS5HVUkuV2ViQXBwbGljYXRpb24sIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAGQWAgICDw8WAh8FBQMgLSBkZAIED2QWAgIBDw8WBB8FBQ5NaW5hIHVwcGdpZnRlch8GZ2RkAg8PZBYEAgEPFgIfBmdkAgMPZBYIAgEPDxYEHwUFDlZpc2Egc29tIHRyw6RkHwZnZGQCAw8PFgQfBQUOVmlzYSBzb20gbGlzdGEfBmhkZAIFDw8WBB8AAsgBHwZoZBYCZg9kFgICAQ8UKwACFCsAAhQrAAIPFgQeF0VuYWJsZUFqYXhTa2luUmVuZGVyaW5naB4PQ2hlY2tDaGlsZE5vZGVzaGQPFCsAAhQrAAIPFgwfBQUWSHV2dWRvYmpla3QgZsO2ciBtb2R1bB4FVmFsdWUFD1JPT1RPQkpFQ1RUWVBFUx4ISW1hZ2VVcmwFHH4vSW1hZ2VzL1RyZWV2aWV3L0ZvbGRlci5naWYeCEV4cGFuZGVkZx4IU2VsZWN0ZWRoHgdDaGVja2VkaGQQFgJmAgEWAhQrAAIPFgwfBQUBQR8LBQdPVF8xMDU1Hw1oHwwFHH4vSW1hZ2VzL1RyZWV2aWV3L0ZvbGRlci5naWYfDmcfD2hkZBQrAAIPFgwfBQUBQh8LBQdPVF8xMDU2Hw1oHwwFHH4vSW1hZ2VzL1RyZWV2aWV3L0ZvbGRlci5naWYfDmgfD2hkZA8WAmZmFgEFdFRlbGVyaWsuV2ViLlVJLlJhZFRyZWVOb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0FCsAAg8WCh8FBQZBbmFseXMfCwUCLTQfDAUcfi9JbWFnZXMvVHJlZXZpZXcvRm9sZGVyLmdpZh8OaB8PaGQQFgJmAgEWAhQrAAIPFgofBQUVT2Z1bGxzdMOkbmRpZ2Egb2JqZWt0HwsFAi0yHwwFHH4vSW1hZ2VzL1RyZWV2aWV3L0ZvbGRlci5naWYfDmgfD2hkZBQrAAIPFgofBQUOVmFsaWRlcmluZ3NmZWwfCwUCLTMfDAUcfi9JbWFnZXMvVHJlZXZpZXcvRm9sZGVyLmdpZh8OaB8PaGRkDxYCZmYWAQV0VGVsZXJpay5XZWIuVUkuUmFkVHJlZU5vZGUsIFRlbGVyaWsuV2ViLlVJLCBWZXJzaW9uPTIwMDguMy4xMTI1LjM1LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTEyMWZhZTc4MTY1YmEzZDQPFCsBAmZmFgEFdFRlbGVyaWsuV2ViLlVJLlJhZFRyZWVOb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ZGQWBGYPDxYMHwUFFkh1dnVkb2JqZWt0IGbDtnIgbW9kdWwfCwUPUk9PVE9CSkVDVFRZUEVTHwwFHH4vSW1hZ2VzL1RyZWV2aWV3L0ZvbGRlci5naWYfDWcfDmgfD2hkFgRmDw8WDB8FBQFBHwsFB09UXzEwNTUfDWgfDAUcfi9JbWFnZXMvVHJlZXZpZXcvRm9sZGVyLmdpZh8OZx8PaGRkAgEPDxYMHwUFAUIfCwUHT1RfMTA1Nh8NaB8MBRx+L0ltYWdlcy9UcmVldmlldy9Gb2xkZXIuZ2lmHw5oHw9oZGQCAQ8PFgofBQUGQW5hbHlzHwsFAi00HwwFHH4vSW1hZ2VzL1RyZWV2aWV3L0ZvbGRlci5naWYfDmgfD2hkFgRmDw8WCh8FBRVPZnVsbHN0w6RuZGlnYSBvYmpla3QfCwUCLTIfDAUcfi9JbWFnZXMvVHJlZXZpZXcvRm9sZGVyLmdpZh8OaB8PaGRkAgEPDxYKHwUFDlZhbGlkZXJpbmdzZmVsHwsFAi0zHwwFHH4vSW1hZ2VzL1RyZWV2aWV3L0ZvbGRlci5naWYfDmgfD2hkZAIHDw8WFB4MU2hvd0VudGl0aWVzZx4Tc2hvd0NyZWF0ZU5ld0J1dHRvbmgeD1Nob3dOb25FbnRpdGllc2gfAALIAR4VU2hvd0Rlc2NyaXB0aW9uQ29sdW1uaB4YU2hvd0NsYXNzaWZpY2F0aW9uQ29sdW1uZx4UU2hvd0RhdGFiYXNlSWRDb2x1bW5oHh9PYmplY3RUeXBlQ2xhc3NpZmljYXRpb25JZElzU2V0aB8GZx4NU2hvd1Jvb3RzT25seWhkFgQCAw9kFgJmD2QWAgIBDxQrAAIPFgIfBmhkZGQCBQ88KwANAgAUKwACDxYIHgtfIURhdGFCb3VuZGcfCWgeC0VkaXRJbmRleGVzFgAeC18hSXRlbUNvdW50AgFkFwEFD1NlbGVjdGVkSW5kZXhlcxYAARYCFgoPZhQrAAMPBRBHcmlkQnV0dG9uQ29sdW1uFCsABRYOHgNfYnQLKX1UZWxlcmlrLldlYi5VSS5HcmlkQnV0dG9uQ29sdW1uVHlwZSwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAwOC4zLjExMjUuMzUsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNAAeA19jbgUEU2hvdx4KSGVhZGVyVGV4dAUGJm5ic3A7HwUFBFZpc2EeCVJlc2l6YWJsZWgeC1Jlb3JkZXJhYmxlaB4Eb2luZAICZBYEHgVXaWR0aBsAAAAAAIBBQAEAAAAeBF8hU0ICgAJkBQpTaG93Q29sdW1uDwUPR3JpZEJvdW5kQ29sdW1uFCsABRYKHglEYXRhRmllbGQFDU9UX05hbWVQbHVyYWwfHQUETmFtbh4DX3NlBQ1PVF9OYW1lUGx1cmFsHghEYXRhVHlwZRkrAh8gAgMWBB4PSG9yaXpvbnRhbEFsaWduCyopU3lzdGVtLldlYi5VSS5XZWJDb250cm9scy5Ib3Jpem9udGFsQWxpZ24BHyICgIAEFgYfJgsrCQEfIRsAAAAAAIBhQAEAAAAfIgKAggRkZA8FD0dyaWRCb3VuZENvbHVtbhQrAAUWCh8dBQ5LbGFzc2lmaWNlcmluZx8jBQhPVENfTmFtZR8kBQhPVENfTmFtZR8lGSsCHyACBBYEHyYLKwkBHyICgIAEFgYfJgsrCQEfIRsAAAAAAIBhQAEAAAAfIgKAggRkZGRlFCsAAAspelRlbGVyaWsuV2ViLlVJLkdyaWRDaGlsZExvYWRNb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ATwrAAcACyl1VGVsZXJpay5XZWIuVUkuR3JpZEVkaXRNb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ARYCHgRfZWZzZGQWEB4FX3FlbHQZKWdTeXN0ZW0uRGF0YS5EYXRhUm93Vmlldywg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H0EFAjI1ZGQUKwACDxYKHwUFCDUwIHJhZGVyHw9nHwwFE34vSW1hZ2VzL0NIS01SSy5HSUYfQAUNTFNUX1BBR0VDT1VOVB9BBQI1MGRkFCsAAg8WCh8FBQkxMDAgcmFkZXIfD2gfDGUfQAUNTFNUX1BBR0VDT1VOVB9BBQMxMDBkZBQrAAIPFgofBQUKQWxsYSByYWRlch8PaB8MZR9ABQ1MU1RfUEFHRUNPVU5UH0EFATBkZA8UKwEFZmZmZmYWAQV5VGVsZXJpay5XZWIuVUkuUmFkVG9vbEJhckJ1dHRvbiwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAwOC4zLjExMjUuMzUsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNA8WCmZmZmZmAgECAQIBAgECARYCBXlUZWxlcmlrLldlYi5VSS5SYWRUb29sQmFyQnV0dG9uLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0BXtUZWxlcmlrLldlYi5VSS5SYWRUb29sQmFyRHJvcERvd24sIFRlbGVyaWsuV2ViLlVJLCBWZXJzaW9uPTIwMDguMy4xMTI1LjM1LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTEyMWZhZTc4MTY1YmEzZDQWFGYPDxYGHwQFBkF2YnJ5dB8+BQFBHwZoZGQCAQ8PFgYfBAUUR2Vub21mw7ZyIHJhZGVyaW5nZW4fPgUBTx8GaGRkAgIPDxYGHwQFCFNrYXBhIG55Hz4FAU4fBmdkZAIDDw8WBh8EBRdSYWRlcmEgbWFya2VyYWRlIG9iamVrdB8+BQFEHwZnFgIfPwUuRGV0dGEga29tbWVyIGF0dCByYWRlcmEgZGUgbWFya2VyYWRlIG9iamVrdGVuLmQCBA8PFgQfBAUvw4RuZHJhciBldHQgYXR0cmlidXQgZsO2ciBkZSBtYXJrZXJhZGUgb2JqZWt0ZW4fBmhkZAIFDw8WAh8GaGRkAgYPDxYCHwZnZBYCZg8PFgQfBQUbRXhjZWxleHBvcnQsIHZhbGRhIGtvbHVtbmVyH0AFEENNRF9FWFBPUlRfRVhDRUxkZAIHDw8WAh8GaGRkAggPDxYCHwZnZBYCAgIPZBYCAgEPFCsAAhQrAAIUKwACDxYIHgZIZWlnaHQcHwloHyICgAEfCmhkDxQrAAEUKwACDxYIHwUFAUEfD2cfCwUWT0JfT2JqZWN0SW5zdGFuY2VUaXRsZR8OaGRkDxQrAQFmFgEFdFRlbGVyaWsuV2ViLlVJLlJhZFRyZWVOb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDA4LjMuMTEyNS4zNSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ZGQWAmYPDxYIHwUFAUEfD2cfCwUWT0JfT2JqZWN0SW5zdGFuY2VUaXRsZR8OaGRkAgkPDxYCHwZnZBYKZg8PFgofBQUIMTAgcmFkZXIfD2gfDGUfQAUNTFNUX1BBR0VDT1VOVB9BBQIxMGRkAgEPDxYKHwUFCDI1IHJhZGVyHw9oHwxlH0AFDUxTVF9QQUdFQ09VTlQfQQUCMjVkZAICDw8WCh8FBQg1MCByYWRlch8PZx8MBRN+L0ltYWdlcy9DSEtNUksuR0lGH0AFDUxTVF9QQUdFQ09VTlQfQQUCNTBkZAIDDw8WCh8FBQkxMDAgcmFkZXIfD2gfDGUfQAUNTFNUX1BBR0VDT1VOVB9BBQMxMDBkZAIEDw8WCh8FBQpBbGxhIHJhZGVyHw9oHwxlH0AFDUxTVF9QQUdFQ09VTlQfQQUBMGRkAgcPZBYEZg8PFgQfDAUkfi9pbWFnZXMvQ29sdW1uc05vdEZpbHRlcmVkMjR4MjQuZ2lmHg1PbkNsaWVudENsaWNrBYUCd2luZG93Lm9wZW4oJ09iamVjdEZpbHRlckV4cHJlc3Npb25QYWdlLmFzcHg/T2JqZWN0VHlwZUlkPTEwNTUmUHJvamVjdE1vZHVsZUlkPTIwMCZDdXJyZW50RmlsdGVyPScsJ0ZJTFRFUl9XSU5ET1cnLCdoZWlnaHQ9MzUwcHgsd2lkdGg9NzAwcHgsdG9wPTIwMCxsZWZ0PTIwMCxzY3JvbGxiYXJzPXllcyx0b29sYmFyPW5vLGxvY2F0aW9uPW5vLGRpcmVjdG9yaWVzPW5vLHN0YXR1cz1ubyxtZW51YmFyPW5vLHJlc2l6YWJsZT15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bS5HVUkuV2ViQXBwbGljYXRpb24uQ29udHJvbHNfVmVyc2lvbkNvbnRyb2xzX1ZlcnNpb25FZGl0Q29udHJvbCtEaXNwbGF5TW9kZXMsIFNhbXJ1bS5HVUkuV2ViQXBwbGljYXRpb24sIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAB4OVmFsdWVMaW5rQ2xhc3MFD3NhbXJ1bS1mb3JtbGluax8GZx4IUm93Q2xhc3MFCnNhbXJ1bS1yb3ceCkVycm9yQ2xhc3MFDHNhbXJ1bS1lcnJvch4TQWx0ZXJuYXRpbmdSb3dDbGFzcwUVc2FtcnVtLWFsdGVybmF0aW5ncm93ZBYmAgEPDxYGHghDc3NDbGFzcwUQc2FtcnVtLWZvcm12YWx1ZR4JRm9udF9Cb2xkZx8iAoIQZGQCAw9kFgICAQ8PFgQfUwUQc2FtcnVtLWZvcm1sYWJlbB8iAgJkZAIFD2QWBAIBDw8WBh9TBQxzYW1ydW0taW5wdXQfIgICHwZoZGQCAw8PFggfUwUQc2FtcnVtLWZvcm12YWx1ZR8FBQVWZXIgMh8iAgIfBmdkZAIHDw8WBB9TBRBzYW1ydW0tZm9ybWxhYmVsHyICAmRkAgkPDxYGH1MFDHNhbXJ1bS1pbnB1dB8iAgIfBmhkZAILDw8WCB9TBRBzYW1ydW0tZm9ybXZhbHVlHwVlHyICAh8GZ2RkAg0PDxYEH1MFEHNhbXJ1bS1mb3JtbGFiZWwfIgICZGQCDw8PFgYfBQUKMjAxMy0wOS0xMx9TBRBzYW1ydW0tZm9ybXZhbHVlHyICAmRkAhEPDxYEH1MFEHNhbXJ1bS1mb3JtbGFiZWwfIgICZGQCEw8PFgYfBQUWVGVzdCB2ZXJzaW9uc2hhbnRlcmluZx9TBRBzYW1ydW0tZm9ybXZhbHVlHyICAmRkAhUPDxYEH1MFEHNhbXJ1bS1mb3JtbGFiZWwfIgICZGQCFw8PFgQfUwUVc2FtcnVtLWZvcm1sYWJlbHNtYWxsHyICAmRkAhkPDxYEH1MFFXNhbXJ1bS1mb3JtbGFiZWxzbWFsbB8iAgJkZAIbD2QWAmYPZBYEAgEPEA8WCh9TBQxzYW1ydW0taW5wdXQeDURhdGFUZXh0RmllbGQFC01WU19WZXJzaW9uHg5EYXRhVmFsdWVGaWVsZAUdTVZTX01FX0lEX0xvY2tlZEF0TW9kaWZ5RXZlbnQfGGcfIgICZBAVAgVWZXIgMgVWZXIgMRUCBTE4OTcyBTE4OTcwFCsDAmdnFgFmZAIDDxAPFgofUwUMc2FtcnVtLWlucHV0H1UFC01WU19WZXJzaW9uH1YFHU1WU19NRV9JRF9Mb2NrZWRBdE1vZGlmeUV2ZW50HxhnHyICAmQQFQENQXJiZXRzdmVyc2lvbhUBAi0xFCsDAWcWAWZkAh8PPCsADQEMFCsAAgUHMjowLDA6MBQrAAIWBB8FBQpQTS1yYXBwb3J0HwsFAjIyZGQCIQ8PFgIfBmhkZAIjDw8WBh9TBQxzYW1ydW0taW5wdXQfIgICHwZoZGQCJQ8PFgYfUwUMc2FtcnVtLWlucHV0HyICAh8GaGRkAicPDxYCHwZoZGQCCQ8PFggeDlNob3dBdHRyaWJ1dGVzaB8AAsgBHztkHwZoZBYCAgQPZBYCAgEPPCsADQIAFCsAAmQXAAEWAhYKDwIDFCsAAxQrAAUWBB4EX2R0ZgUFT0JfSUQfJAUFT0JfSURkZGQFClNob3dDb2x1bW4UKwAFFgQfIwUOT0JfU3RyaW5nVmFsdWUfJAUOT0JfU3RyaW5nVmFsdWVkZGQFFE9iamVjdEluc3RhbmNlQ29sdW1uFCsABRYEHyMFD09UX05hbWVTaW5ndWxhch8kBQ9PVF9OYW1lU2luZ3VsYXJkZGQFEE9iamVjdFR5cGVDb2x1bW5kZRQrAAALKwoBPCsABwALKwsBFgIfJ2RkFgYfLGUfLQsrCgEfKRUBBU9CX0lEZmQCCw8PFgYfAALIAR87ZB8GaGQWAgIED2QWAgIBDzwrAA0CABQrAAJkFwABFgIWCg8CBRQrAAUUKwAFFgQfWAUFT0JfSUQfJAUFT0JfSURkZGQFClNob3dDb2x1bW4UKwAFFgYfIwUPT1RfTmFtZVNpbmd1bGFyHyQFD09UX05hbWVTaW5ndWxhch8GZ2RkZAUQT2JqZWN0VHlwZUNvbHVtbhQrAAUWBB8jBQ5PQl9TdHJpbmdWYWx1ZR8kBQ5PQl9TdHJpbmdWYWx1ZWRkZAUUT2JqZWN0SW5zdGFuY2VDb2x1bW4UKwAFFgQfIwUTT1RSX0NhcHRpb25TaW5ndWxhch8kBRNPVFJfQ2FwdGlvblNpbmd1bGFyZGRkBRxPYmplY3RUeXBlUmVsYXRpb25zaGlwQ29sdW1uFCsABRYEHyMFC0Rlc2NyaXB0aW9uHyQFC0Rlc2NyaXB0aW9uZBYEHyEcHyICgAJkBRFEZXNjcmlwdGlvbkNvbHVtbmRlFCsAAAsrCgE8KwAHAAsrCwEWAh8nZGQWCB9GBSdEZXQgZmlubnMgaW5nYSB2YWxpZGVyaW5nc2ZlbCBpIG1vZHVsZW4fLGUfLQsrCgEfKRUBBU9CX0lEZmQCFQ9kFgQCAQ8WAh8GZ2QCAw9kFggCAw8PFgIfBQUpRGV0IGZpbm5zIGluZ2VuIGJlc2tyaXZuaW5nIGbDtnIgbW9kdWxlbi5kZAIHDw8WGh9KBRVzYW1ydW0tZm9ybWxhYmVsc21hbGwfSwUQc2FtcnVtLWZvcm12YWx1ZR9QBQpzYW1ydW0tcm93HwACyAEfTAUSc2FtcnVtLW9iamVjdHRhYmxlH00FEHNhbXJ1bS1mb3JtbGFiZWwfTgUMc2FtcnVtLWlucHV0HghzaG93RGF0ZWcfTwUPc2FtcnVtLWZvcm1saW5rH0lkH1EFDHNhbXJ1bS1lcnJvch4Mc2hvd0FjdGl2YXRlZx9SBRVzYW1ydW0tYWx0ZXJuYXRpbmdyb3dkFgJmDxYCHgV3aWR0aAUEMTAwJRYGZg9kFgJmD2QWAgIBDw8WAh8FBQlWZXJzaW9uZXJkZAIBD2QWAmYPZBYCAgEPFCsAAg8WAh8JaGQPFCsAARQrAAIPFggfBQUUTMOlcyBha3R1ZWxsIHZlcnNpb24fBAUzU2thcGFyIGVuIG55IGzDpXN0IHZlcnNpb24gdXRpZnLDpW4gYXJiZXRzdmVyc2lvbmVuHwwFE34vSW1hZ2VzL0xvY2sxNi5naWYfQAUPQ01EX0xPQ0tWRVJTSU9OZGQPFCsBAWYWAQV5VGVsZXJpay5XZWIuVUkuUmFkVG9vbEJhckJ1dHRvbiwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAwOC4zLjExMjUuMzUsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNBYCZg8PFggfBQUUTMOlcyBha3R1ZWxsIHZlcnNpb24fBAUzU2thcGFyIGVuIG55IGzDpXN0IHZlcnNpb24g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Gw8PFgIfBQUUU0FNUlVNIFdlYiAxLjEuNzEuNDhkZBgCBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WCAUPY3RsMDAkYnRuTG9nb3V0BRtjdGwwMCRidG5NaW5pbWl6ZUxlZnRQYW5lbDEFQGN0bDAwJExlZnRQYW5lbDFQbGFjZUhvbGRlciRjdGxPYmplY3RUeXBlTGlzdExlZnQkbHN0T2JqZWN0VHlwZXMFG2N0bDAwJGJ0bk1pbmltaXplUmlnaHRQYW5lbAUyY3RsMDAkUmlnaHRQYW5lbFBsYWNlSG9sZGVyJGN0bFZlcnNpb25zJGN0bFRvb2xCYXIFM2N0bDAwJFJpZ2h0UGFuZWxQbGFjZUhvbGRlciRjdGxWZXJzaW9ucyRsc3RWZXJzaW9ucwU4Y3RsMDAkUmlnaHRQYW5lbFBsYWNlSG9sZGVyJGN0bEdlbmVyYWxSZXBvcnRzJGxzdFJlcG9ydHMFN2N0bDAwJFJpZ2h0UGFuZWxQbGFjZUhvbGRlciRjdGxNb2R1bGVSZXBvcnRzJGxzdFJlcG9ydHMFPmN0bDAwJFdvcmtBcmVhUGxhY2VIb2xkZXIkY3RsT2JqZWN0SW5zdGFuY2VMaXN0JGNib09iamVjdFR5cGVzDxQrAAJlZWTu7zGOIj7yFJKKQ4mHF7KxeQQKrA==">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=3aQh7nnt2KGmeju4sNRz9aKoQ2SEOfifbRJpgYKZzW4pTqVk6cV0fPyJwOrOYDqXWcJnUo-72PzPx0O26qTDccvtlBg1&amp;t=639088132438931106" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=ygS5K0Q_JSgv-NEa4UKaBrNFI9-iqOGN1uftCEoiU3NJou2RH0BSi3UgzTRxGf1b5BA4oo_M1P91VRUUdJ8A_YkPqMxUTTT9dxycHfagBOgn4teuiShnHEjzsFtQpxXkLXaiHw2&amp;t=ffffffffe8c5bfb1" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=8o85MZh4LOkSMZ0-Pnenkm2WJ0rvX-4VZbBJRZ-2ILoCKuR5wrsO_VebmjZwEG4SyAfyz6LLIi2PX0MKX_CZfDfJd26aBMrqIAYecE1r2qnpHBlPiK6Dy7JoAzSNEz-2xjQYUqrmv9l1BYJ15oNGNEgqvUiW5RznSoSDRhNSrRU1oHal0&amp;t=ffffffffa50b82b2" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=il2zGEi7rxlOsHvmkApw2pfG6ovRtFaOnkECdrgedCYqKwAj1SvDaaHYeZdOSrWktnMQDQdRpzqeRNi5I4xQqPyuX6ck6Zzs3ykhAfnBHR8vYzgZpManPy3PH6dNXoULY80LYzo48LtorxTwgjhIVAnPxfFczWrJlw3g-4affmtNkYNK0&amp;t=ffffffffa50b82b2" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=GKkbrh0nulHUDm3ZGwoNTM_z2kWF5JwT_-bAAyvSwrSof1tFrLw0X1ckFcB5K2Jq_2yhvtffLow6M9g0iiuKsE6EqLYYhA308VRRznaGp9imx1_YPanmymZxQMnuJoqZp9f_xg2&amp;t=20216ac0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=wIzF4X9DKRbnEVD-0Sswz3KFmO3zqLQfTph2K2CQgRmuR9vQ7_EglLZEOWk8am5o2QBbuOPKDDzCk--Ct-ITesuB7yWDEfmQu0KWg6G4UqBSht0xsCgjqM-bWyyYK8OEFb4aZACYNhg9z21dybEva-W4PWk1&amp;t=20216ac0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=kUOD8VQsldGyXbQOVfhnAvpj3KFBnjTTQy_JfjeLjaB9TrSz9PuLC9PMYutfDQzIH-PBPBGABgw93Xu-BnQDLcJWeR4OSmglHG73uOnBanHpTF8HBv34wjXeMwXvD5n0P_Pdk8ZMQxs_KnA7C9FCytTN-PD2rAME1kxDMONsd1n_bi9p0&amp;t=20216ac0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=soSRhuLvTqeuOsKlQbVrQQr1wG2hbE9a2DE6h9f92Oy4n-2nk8Bqc5MguAocv56jh_-FC8D05A34TIgYJ4VT-JS91U3fps_uRIKyUofHmsT3lGHqqtSJLGk43w5KoZFbQwxnGLexm3T5n_AalbjhKoX8W_DQdGEYME0A7cplxEV5KHXF0&amp;t=20216ac0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=QnpCFBN0A4AEW_OS3C1q3fCq0nRPYw7YpNtSy9gE0OBZ52GOPdHkTs8_1o-EFrnht_gDVg-KPozMKxHf6Iq7DXydGJpATIb_wCE9gEwzWCFnPE8ySgkypwcSEKofyOwjZyIeUZqSrO3AyWSEnJ7oaYn00Ig1&amp;t=20216ac0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=djXh44fGZe3-CcmxBGk7EYOsTQIzN-6WYfWKCVyeMsCt8pavymEgHR71tunE23E0XMR6vMgrZ91IQ_N0nRD29p1Lp-qSiFBrQgHWOu6h-vxVoCWAlwJ4r8C7ywI-UWIvVV0agA2&amp;t=20216ac0" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="E6855633">
+	<input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0">
+	<input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWJgK6r7jmAgK+nYa6CgKQnaOCAwKQnbfdCwL7wLXEBQKezO3BDgKDuML6AgKM+62hDgLU6da+DwLU6cLjBgLU6f50ArjwlpsBArjw7q4NAp3ZpqMKAsnqzbcNAs/qzbcNAo/PuNkKAoyg3rQGArO6udYMArPKo4IFAtHPzqUOAsiyn9YKAq3JgUECkuDjqwYCm/bkugoCnPbkugoC/bqMiQIC/rqMiQICr+zWgwcCsOzWgwcCoezrmwICoezXwAkCoezDZQKh7K+KCAL2i6qyCgLboowdAqze5dwOApH1x8cEg2zOrzu3u555fhLC1E+s3WxU/LE=">
+</div>
+        <table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%">
+            <tbody><tr>
+                <td class="samrum-topareaframe">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody><tr>
+                            <td align="left" width="1%" nowrap="">
+                                <img id="ctl00_Image1" src="Images/main_top_bak.png" style="border-width:0px;">
+                                <a id="ctl00_lnkLogo" title="Samrum 1.1.71.48" href="./"><img title="Samrum 1.1.71.48" src="Images/logo_main.png" style="border-width:0px;"></a>
+                            </td>                                
+                            <td width="97%" nowrap="" valign="middle">
+                                <span id="ctl00_lblProjectName" class="samrum-toplabel">2021-05-05</span>
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td width="1%" nowrap="">
+                                &nbsp;
+                            </td>
+                            <td valign="middle" align="right" width="1%" nowrap="">
+                                <input type="image" name="ctl00$btnLogout" id="ctl00_btnLogout" onmouseover="this.src='/Images/Out_2.png';" onmouseout="this.src='/Images/Out_1.png';" src="Images/Out_1.png" alt="Logga ut från Samrum" onclick="return confirm('Du håller på att logga ut.');" style="border-width:0px;">&nbsp;
+                                
+                            </td>
+                        </tr>
+                        <tr id="ctl00_trLoggedId" style="padding-bottom: 2px;">
+	<td nowrap="nowrap" align="LEFT" width="1%" colspan="2">
+                                &nbsp;<a class="samrum-moduletitle" href="javascript:__doPostBack('ctl00$ctlPageNavigationControl$ctl00','')">Startsida</a><span class="samrum-moduletitle"> - </span><a class="samrum-moduletitle" href="javascript:__doPostBack('ctl00$ctlPageNavigationControl$ctl01','')">Test versionshantering (Modul)</a>
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                                                
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                                                
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="1%">
+                                <a id="ctl00_lnkDatabaseAdministration" class="samrum-toplink" href="javascript:__doPostBack('ctl00$lnkDatabaseAdministration','')">Databasadministration</a>&nbsp;
+                            </td>
+	<td valign="top" align="right" nowrap="nowrap" width="98%" style="padding-right:10px;">
+                                <a id="ctl00_lnkMyProfile" class="samrum-toplink" href="javascript:__doPostBack('ctl00$lnkMyProfile','')">Mina uppgifter</a>                                
+                            </td>
+</tr>
+
+                    </tbody></table>
+                    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tctl00$WorkAreaPlaceHolder$ctlVersionEdit$UpdatePanel1','tctl00$RightPanelPlaceHolder$ctlGeneralReports$ctl00$RightPanelPlaceHolder$ctlGeneralReports$RadAjaxPanel1Panel','tctl00$RightPanelPlaceHolder$ctlModuleReports$ctl00$RightPanelPlaceHolder$ctlModuleReports$RadAjaxPanel1Panel'], [], [], 90);
+//]]>
+</script>
+
+                      
+                   </td>
+            </tr>
+            <tr>
+                <td valign="top" height="100%">
+                    <div class="samrum-titleareaframe">
+                        <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <td id="ctl00_tdLeftPanel1" valign="top" width="0" class="samrum-panel-left" align="center">
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tbody><tr id="ctl00_trToggleLeftPanel1">
+	<td align="right" style="padding-top:1px;">
+                                                <input type="image" name="ctl00$btnMinimizeLeftPanel1" id="ctl00_btnMinimizeLeftPanel1" onmouseover="this.src='/Images/arrow_l_2.png';" onmouseout="this.src='/Images/arrow_l.png';" src="Images/arrow_l.png" style="border-width:0px;">
+                                                
+                                            </td>
+</tr>
+
+                                        <tr>
+                                            <td>
+                                                
+    <a id="ctl00_LeftPanel1PlaceHolder_btnShowTree" class="samrum-formlink" href="javascript:__doPostBack('ctl00$LeftPanel1PlaceHolder$btnShowTree','')">Visa som träd</a>
+    
+    
+    
+<table cellpadding="0" cellspacing="0" width="100%">
+    <tbody><tr>
+    <td colspan="2">
+<span id="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lblHeader" class="samrum-title"></span>
+            <table>
+                <tbody><tr id="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_trToolBar">
+	<td>
+                        
+                    </td>
+</tr>
+
+                <tr>
+                    <td>
+                            <div id="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes" class="RadGrid RadGrid_DefaultTheme" style="width:100%;" tabindex="0">
+
+<!-- 2008.3.1125.35 --><table class="MasterTable_DefaultTheme" cellspacing="0" border="0" id="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ctl00" style="width:100%;border-collapse:collapse;table-layout:fixed;overflow:hidden;empty-cells:show;">
+	<colgroup>
+		<col width="35px">
+		<col width="140px">
+		<col width="140px">
+	</colgroup>
+<thead>
+		<tr>
+			<th scope="col" class="GridHeader_DefaultTheme">&nbsp;</th><th scope="col" class="GridHeader_DefaultTheme" style="text-align:left;"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$LeftPanel1PlaceHolder$ctlObjectTypeListLeft$lstObjectTypes$ctl00$ctl02$ctl01$ctl00','')">Namn</a>&nbsp;<input type="submit" name="ctl00$LeftPanel1PlaceHolder$ctlObjectTypeListLeft$lstObjectTypes$ctl00$ctl02$ctl01$ctl01" value=" " title="Sorterar stigande" class="rgSortAsc"></th><th scope="col" class="GridHeader_DefaultTheme" style="text-align:left;"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$LeftPanel1PlaceHolder$ctlObjectTypeListLeft$lstObjectTypes$ctl00$ctl02$ctl01$ctl02','')">Klassificering</a></th>
+		</tr>
+	</thead><tbody>
+	<tr class="GridRow_DefaultTheme" id="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ctl00__0">
+		<td><a href="javascript:__doPostBack('ctl00$LeftPanel1PlaceHolder$ctlObjectTypeListLeft$lstObjectTypes$ctl00$ctl04$ctl00','')">Visa</a></td><td align="left">A</td><td align="left">&nbsp;</td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ctl00__1">
+		<td><a href="javascript:__doPostBack('ctl00$LeftPanel1PlaceHolder$ctlObjectTypeListLeft$lstObjectTypes$ctl00$ctl06$ctl00','')">Visa</a></td><td align="left">B</td><td align="left">&nbsp;</td>
+	</tr>
+	</tbody>
+
+</table><input id="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ClientState" name="ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ClientState" type="hidden" autocomplete="off">
+	</div>
+             
+                    </td>
+                </tr>
+            </tbody></table>        
+</td>
+</tr>
+</tbody></table>
+
+
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+
+                                
+                                <td valign="top" width="100%">
+                                    <table cellpadding="0" cellspacing="1" width="100%" height="100%">
+                                    <tbody><tr>
+                                    <td valign="top" class="samrum-workspace" width="100%">
+                                    
+    
+    
+    
+    
+
+<table id="tblMainTable" cellpadding="1" cellspacing="0" class="samrum-objecttable">
+    <tbody><tr>
+        <td class="samrum-row" colspan="3">
+            
+        </td>
+    </tr>
+    <tr>
+        <td id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_tdCaption" class="samrum-row" style="width: 96px">
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblNameCaption" class="samrum-formlabel">Versionsnamn:</span></td>
+
+        <td class="samrum-row" style="width: 7px">&nbsp;</td>
+        <td id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_tdValue" class="samrum-row" width="100%">
+            
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblName" class="samrum-formvalue">Ver 2</span></td>
+
+    </tr>
+    <tr>
+        <td class="samrum-row" valign="top" style="width: 96px">
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblDescriptionCaption" class="samrum-formlabel">Beskrivning:</span></td>
+        <td class="samrum-row" style="width: 7px">&nbsp;</td>
+        <td class="samrum-row">
+            
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblDescription" class="samrum-formvalue"></span></td>
+    </tr>
+    <tr>
+        <td class="samrum-row" style="width: 96px">
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblDateCaption" class="samrum-formlabel">Versionsdatum:</span></td>
+        <td class="samrum-row" style="width: 7px">&nbsp;</td>
+        <td class="samrum-row">
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblDate" class="samrum-formvalue">2013-09-13</span></td>
+    </tr>
+    <tr>
+        <td class="samrum-row" style="width: 96px">
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblModuleCaption" class="samrum-formlabel">Modul:</span></td>
+        <td class="samrum-row" style="width: 7px">&nbsp;</td>
+        <td class="samrum-row">
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblModule" class="samrum-formvalue">Test versionshantering</span></td>
+    </tr>
+    <tr>
+        <td class="samrum-row" style="width: 96px" valign="top">
+            <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblReportCaption" class="samrum-formlabel">PM-utskrift:</span></td>
+        <td class="samrum-row" style="width: 7px">
+        </td>
+        <td class="samrum-row" valign="top">
+                    <div id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_UpdatePanel1">
+	
+                            </div><table>
+                        <tbody><tr>
+                            <td>
+                                <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblFromVerisonCaption" class="samrum-formlabelsmall">Från version:</span></td>
+                            <td>
+                            </td>
+                            <td>
+                                <span id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_lblToVersionCaption" class="samrum-formlabelsmall">Till version:</span></td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+            <td>
+                                <select name="ctl00$WorkAreaPlaceHolder$ctlVersionEdit$cboFromVersion" onchange="javascript:setTimeout('__doPostBack(\'ctl00$WorkAreaPlaceHolder$ctlVersionEdit$cboFromVersion\',\'\')', 0)" id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_cboFromVersion" class="samrum-input">
+		<option selected="selected" value="18972">Ver 2</option>
+		<option value="18970">Ver 1</option>
+
+	</select></td>
+                            <td>
+                                &nbsp;</td>
+                            <td>
+                                <select name="ctl00$WorkAreaPlaceHolder$ctlVersionEdit$cboToVersion" onchange="javascript:setTimeout('__doPostBack(\'ctl00$WorkAreaPlaceHolder$ctlVersionEdit$cboToVersion\',\'\')', 0)" id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_cboToVersion" class="samrum-input">
+		<option selected="selected" value="-1">Arbetsversion</option>
+
+	</select></td>
+                
+
+                            <td>
+                                
+                                <a href="#ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_SkipLink"><img alt="Skip Navigation Links" src="/WebResource.axd?d=8vAMXy0l77ewlP6gUobLkpYSkZmSfYu_1rBdA_Lp7pXnurWn9LPOdeuBIcE6VIfayy9RnyQFBnUbG3EBPAbUIlw9CBU1&amp;t=639088132438931106" width="0" height="0" style="border-width:0px;"></a><table id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports" class="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_2" cellpadding="0" cellspacing="0" border="0">
+	<tbody><tr onmouseover="Menu_HoverStatic(this)" onmouseout="Menu_Unhover(this)" onkeyup="Menu_Key(event)" id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReportsn0">
+		<td><table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tbody><tr>
+				<td style="white-space:nowrap;width:100%;"><a class="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_1" href="javascript:__doPostBack('ctl00$WorkAreaPlaceHolder$ctlVersionEdit$mnuReports','22')">PM-rapport</a></td>
+			</tr>
+		</tbody></table></td>
+	</tr>
+</tbody></table><a id="ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_SkipLink"></a>
+                            </td>
+                        </tr>
+                    </tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td class="samrum-row" colspan="3">
+            
+            
+            
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+    
+    
+
+                                    </td>
+                                    </tr>
+                                    </tbody></table>
+                                    
+                                </td>
+                                <td id="ctl00_tdRightPanel" valign="top" width="0" class="samrum-panel-right" align="center">                                          
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tbody><tr id="ctl00_trToggleRightPanel">
+	<td align="left" style="padding-top:1px;">
+                                                
+                                                <input type="image" name="ctl00$btnMinimizeRightPanel" id="ctl00_btnMinimizeRightPanel" onmouseover="this.src='/Images/arrow_r_2.png';" onmouseout="this.src='/Images/arrow_r.png';" src="Images/arrow_r.png" style="border-width:0px;">
+                                            </td>
+</tr>
+
+                                        <tr>
+                                            <td>
+                                                
+    <table width="1">
+        <tbody><tr>
+            <td width="100%">
+                <span id="ctl00_RightPanelPlaceHolder_lblModuleInfoCaption" class="samrum-Title">Modulbeskrivning</span><br>
+                <span id="ctl00_RightPanelPlaceHolder_lblModuleInfo" class="samrum-formvalue">Det finns ingen beskrivning för modulen.</span>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                &nbsp;<a id="ctl00_RightPanelPlaceHolder_lnkViewDesigner" class="samrum-formlink" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$lnkViewDesigner','')">Vydesigner</a>
+            </td>
+        </tr>        
+        <tr>
+            <td width="100%">
+                <table id="ctl00_RightPanelPlaceHolder_ctlVersions_tblVersions" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td align="left" width="100%">
+            <span id="ctl00_RightPanelPlaceHolder_ctlVersions_lblHeader" class="samrum-title" style="font-weight:bold;">Versioner</span>
+        </td>
+	</tr>
+	<tr>
+		<td align="left" width="100%">
+            <div id="ctl00_RightPanelPlaceHolder_ctlVersions_ctlToolBar" class="RadToolBar RadToolBar_Horizontal RadToolBar_DefaultTheme RadToolBar_DefaultTheme_Horizontal " style="overflow:visible;z-index:9000;">
+			<div class="rtbOuter">
+				<div class="rtbMiddle">
+					<div class="rtbInner" style="width:100%;">
+						<ul class="rtbUL">
+							<li class="rtbItem rtbBtn"><a title="Skapar en ny låst version utifrån arbetsversionen" class="rtbWrap" href="#"><span class="rtbOut"><span class="rtbMid"><span class="rtbIn"><img alt="Skapar en ny låst version utifrån arbetsversionen" src="Images/Lock16.gif" class="rtbIcon"><span class="rtbText">Lås aktuell version</span></span></span></span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div><input id="ctl00_RightPanelPlaceHolder_ctlVersions_ctlToolBar_ClientState" name="ctl00_RightPanelPlaceHolder_ctlVersions_ctlToolBar_ClientState" type="hidden" autocomplete="off">
+		</div>
+        </td>
+	</tr>
+	<tr>
+		<td align="left">
+            <div id="ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions" class="RadGrid RadGrid_DefaultTheme" tabindex="0">
+
+		<table class="MasterTable_DefaultTheme" cellspacing="0" border="0" id="ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ctl00" style="width:100%;border-collapse:collapse;table-layout:fixed;overflow:hidden;empty-cells:show;">
+	<colgroup>
+		<col width="29px">
+		<col width="100px">
+		<col width="75px">
+		<col width="53px">
+	</colgroup>
+<thead>
+		<tr>
+			<th scope="col" class="GridHeader_DefaultTheme">&nbsp;</th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl02$ctl01$ctl00','')">Version</a></th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl02$ctl01$ctl01','')">Datum</a>&nbsp;<input type="submit" name="ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl02$ctl01$ctl02" value=" " title="Sorterar fallande" class="rgSortDesc"></th><th scope="col" class="GridHeader_DefaultTheme">&nbsp;</th>
+		</tr>
+	</thead><tbody>
+	<tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ctl00__0" style="font-weight:bold;">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl04$ctl00','')"></a></td><td>Arbetsversion</td><td>&nbsp;</td><td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl04$ctl01','')"></a></td>
+	</tr><tr class="GridAltRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ctl00__1" style="font-weight:normal;">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl06$ctl00','')">Visa</a></td><td>Ver 2</td><td>2013-09-13</td><td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl06$ctl01','')">Aktivera</a></td>
+	</tr><tr class="GridRow_DefaultTheme" id="ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ctl00__2" style="font-weight:normal;">
+		<td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl08$ctl00','')">Visa</a></td><td>Ver 1</td><td>2013-09-13</td><td><a href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00$ctl08$ctl01','')">Aktivera</a></td>
+	</tr>
+	</tbody>
+
+</table><input id="ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ClientState" name="ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ClientState" type="hidden" autocomplete="off">
+			</div>
+		    
+            
+        </td>
+	</tr>
+	<tr>
+		<td align="right" width="0" nowrap="nowrap">
+        </td>
+	</tr>
+</tbody></table>
+
+<br>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%">
+                <div id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_pnlLoadingPanel1" style="display:none;background-color:#E0E0E0;">
+	
+    <img id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_imgLoadingPanelImage" src="Images/Loading/Loading6.gif" style="border-width:0px;margin-top: 70px;">
+
+</div>
+
+<table>
+    <tbody><tr>
+    <td>
+        <span id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_lblHeader" class="samrum-title">Generella utskrifter</span></td>
+    </tr>
+    <tr>
+        <td>
+            <div id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_ctl00_RightPanelPlaceHolder_ctlGeneralReports_RadAjaxPanel1Panel" style="height: 100%;">
+	<div id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_RadAjaxPanel1" style="height:100%;">
+		
+                <div id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports" class="RadGrid RadGrid_DefaultTheme" style="width:100%;" tabindex="0">
+
+		<table class="MasterTable_DefaultTheme" cellspacing="0" border="0" id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports_ctl00" style="width:100%;border-collapse:collapse;table-layout:fixed;overflow:hidden;empty-cells:show;">
+	<colgroup>
+		<col width="35px">
+		<col width="200px">
+		<col>
+	</colgroup>
+<thead>
+		<tr>
+			<th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlGeneralReports$lstReports$ctl00$ctl02$ctl01$ctl00','')">&nbsp;</a></th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlGeneralReports$lstReports$ctl00$ctl02$ctl01$ctl01','')">Namn</a>&nbsp;<input type="button" name="ctl00$RightPanelPlaceHolder$ctlGeneralReports$lstReports$ctl00$ctl02$ctl01$ctl02" value=" " onclick="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlGeneralReports$lstReports$ctl00$ctl02$ctl01$ctl02','')" title="Sorterar stigande" class="rgSortAsc"></th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlGeneralReports$lstReports$ctl00$ctl02$ctl01$ctl03','')">Beskrivning</a></th>
+		</tr>
+	</thead><tbody>
+	<tr class="rgNoRecords">
+		<td colspan="3" style="text-align:left;"><div style="width:;">Det finns inga generella utskrifter att visa</div></td>
+	</tr>
+	</tbody>
+
+</table><input id="ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports_ClientState" name="ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports_ClientState" type="hidden" autocomplete="off">
+			</div>
+		    
+            
+	</div>
+</div>
+         </td>
+    </tr>
+</tbody></table>        
+<br>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%">
+                <div id="ctl00_RightPanelPlaceHolder_ctlModuleReports_pnlLoadingPanel1" style="display:none;background-color:#E0E0E0;">
+	
+    <img id="ctl00_RightPanelPlaceHolder_ctlModuleReports_imgLoadingPanelImage" src="Images/Loading/Loading6.gif" style="border-width:0px;margin-top: 70px;">
+
+</div>
+
+<table>
+    <tbody><tr>
+    <td>
+        <span id="ctl00_RightPanelPlaceHolder_ctlModuleReports_lblHeader" class="samrum-title">Modulutskrifter</span></td>
+    </tr>
+    <tr>
+        <td>
+            <div id="ctl00_RightPanelPlaceHolder_ctlModuleReports_ctl00_RightPanelPlaceHolder_ctlModuleReports_RadAjaxPanel1Panel" style="height: 100%;">
+	<div id="ctl00_RightPanelPlaceHolder_ctlModuleReports_RadAjaxPanel1" style="height:100%;">
+		
+                <div id="ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports" class="RadGrid RadGrid_DefaultTheme" style="width:100%;" tabindex="0">
+
+		<table class="MasterTable_DefaultTheme" cellspacing="0" border="0" id="ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports_ctl00" style="width:100%;border-collapse:collapse;table-layout:fixed;overflow:hidden;empty-cells:show;">
+	<colgroup>
+		<col width="35px">
+		<col width="200px">
+		<col>
+	</colgroup>
+<thead>
+		<tr>
+			<th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlModuleReports$lstReports$ctl00$ctl02$ctl01$ctl00','')">&nbsp;</a></th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlModuleReports$lstReports$ctl00$ctl02$ctl01$ctl01','')">Namn</a>&nbsp;<input type="button" name="ctl00$RightPanelPlaceHolder$ctlModuleReports$lstReports$ctl00$ctl02$ctl01$ctl02" value=" " onclick="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlModuleReports$lstReports$ctl00$ctl02$ctl01$ctl02','')" title="Sorterar stigande" class="rgSortAsc"></th><th scope="col" class="GridHeader_DefaultTheme"><a title="Klicka här för att sortera" href="javascript:__doPostBack('ctl00$RightPanelPlaceHolder$ctlModuleReports$lstReports$ctl00$ctl02$ctl01$ctl03','')">Beskrivning</a></th>
+		</tr>
+	</thead><tbody>
+	<tr class="rgNoRecords">
+		<td colspan="3" style="text-align:left;"><div style="width:;">Det finns inga modulutskrifter att visa</div></td>
+	</tr>
+	</tbody>
+
+</table><input id="ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports_ClientState" name="ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports_ClientState" type="hidden" autocomplete="off">
+			</div>
+		    
+            
+	</div>
+</div>
+         </td>
+    </tr>
+</tbody></table>        
+
+            </td>
+        </tr>
+    </tbody></table>
+
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="20" background="Images/main_bot_bak.png">
+                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                        <tbody><tr>
+                            <td align="left" style="padding-left:5px;">
+                                <span id="ctl00_lblBottomLeftInformation" class="samrum-toplabel" style="font-weight:normal;">Arbetsversion</span>
+                            </td>
+                            <td align="center">
+                                <span id="ctl00_lblBottomCenterInformation" class="samrum-toplabel"></span>
+                            </td>
+                            <td align="right" style="padding-right:5px;">
+                                <span id="ctl00_lblBottomRightInformation" class="samrum-toplabel">SAMRUM Web 1.1.71.48</span>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+        </tbody></table>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_Data = new Object();
+ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_Data.disappearAfter = 500;
+ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_Data.horizontalOffset = 0;
+ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_Data.verticalOffset = 0;
+ctl00_WorkAreaPlaceHolder_ctlVersionEdit_mnuReports_Data.iframeUrl = '/WebResource.axd?d=PWCsfBCVyc3P_vb_cjC0nAOsZK4EteRtG3oobxEB0HaYqNdfPavzxw69OG-HMVx6Y_2gosxx0zDyjskL0aXw8BZdesA1&t=639088132438931106';
+
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+
+theForm.oldOnLoad = window.onload;
+window.onload = WebForm_RestoreScrollPosition;
+Sys.Application.initialize();
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadGrid, {"ClientID":"ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes","ClientSettings":{"EnableRowHoverStyle":true,"ColumnsReorderMethod":1,"ShouldCreateRows":true,"ReorderColumnsOnClient":true,"DataBinding":{},"Selecting":{"AllowRowSelect":true},"Scrolling":{},"Resizing":{"AllowColumnResize":true,"ClipCellContentOnResize":true,"EnableRealTimeResize":true,"ResizeGridOnColumnResize":true},"ClientMessages":{}},"Skin":"DefaultTheme","UniqueID":"ctl00$LeftPanel1PlaceHolder$ctlObjectTypeListLeft$lstObjectTypes","_activeRowIndex":"","_controlToFocus":"","_currentPageIndex":0,"_editIndexes":"[]","_embeddedSkin":false,"_gridTableViewsData":"[{\"ClientID\":\"ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ctl00\",\"UniqueID\":\"ctl00$LeftPanel1PlaceHolder$ctlObjectTypeListLeft$lstObjectTypes$ctl00\",\"PageSize\":25,\"PageCount\":1,\"EditMode\":\"EditForms\",\"CurrentPageIndex\":0,\"VirtualItemCount\":0,\"AllowMultiColumnSorting\":false,\"IsItemInserted\":false,\"clientDataKeyNames\":[],\"_dataBindTemplates\":false,\"_selectedItemStyle\":\"\",\"_selectedItemStyleClass\":\"SelectedRow_DefaultTheme\",\"_columnsData\":[{\"UniqueName\":\"ShowColumn\",\"Resizable\":false,\"Reorderable\":false,\"Groupable\":false,\"ColumnType\":\"GridButtonColumn\",\"Display\":true},{\"UniqueName\":\"OT_NamePlural\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"OTC_Name\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true}]}]","_masterClientID":"ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ctl00","allowMultiRowSelection":false,"clientStateFieldID":"ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes_ClientState"}, null, null, $get("ctl00_LeftPanel1PlaceHolder_ctlObjectTypeListLeft_lstObjectTypes"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadToolBar, {"_postBackReference":"__doPostBack(\u0027ctl00$RightPanelPlaceHolder$ctlVersions$ctlToolBar\u0027,\u0027{0}\u0027)","_simplePostBack":true,"_skin":"DefaultTheme","attributes":{},"clientStateFieldID":"ctl00_RightPanelPlaceHolder_ctlVersions_ctlToolBar_ClientState","collapseAnimation":"{\"type\":12,\"duration\":200}","itemData":[{"commandName":"CMD_LOCKVERSION","toolTip":"Skapar en ny låst version utifrån arbetsversionen","cssClass":"rtbWrap","imageUrl":"Images/Lock16.gif"}]}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlVersions_ctlToolBar"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadGrid, {"ClientID":"ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions","ClientSettings":{"EnableRowHoverStyle":true,"ColumnsReorderMethod":1,"ShouldCreateRows":true,"ReorderColumnsOnClient":true,"DataBinding":{},"Selecting":{},"Scrolling":{},"Resizing":{"AllowColumnResize":true,"ClipCellContentOnResize":true,"EnableRealTimeResize":true,"ResizeGridOnColumnResize":true},"ClientMessages":{}},"Skin":"DefaultTheme","UniqueID":"ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions","_activeRowIndex":"","_controlToFocus":"","_currentPageIndex":0,"_editIndexes":"[]","_embeddedSkin":false,"_gridTableViewsData":"[{\"ClientID\":\"ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ctl00\",\"UniqueID\":\"ctl00$RightPanelPlaceHolder$ctlVersions$lstVersions$ctl00\",\"PageSize\":50,\"PageCount\":1,\"EditMode\":\"EditForms\",\"CurrentPageIndex\":0,\"VirtualItemCount\":0,\"AllowMultiColumnSorting\":false,\"IsItemInserted\":false,\"clientDataKeyNames\":[],\"_dataBindTemplates\":false,\"_selectedItemStyle\":\"\",\"_selectedItemStyleClass\":\"SelectedRow_DefaultTheme\",\"_columnsData\":[{\"UniqueName\":\"ShowColumn\",\"Resizable\":false,\"Reorderable\":true,\"Groupable\":false,\"ColumnType\":\"GridButtonColumn\",\"Display\":true},{\"UniqueName\":\"VersionNameColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"VersionDateColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"DataFormatString\":\"{0:d}\",\"Display\":true},{\"UniqueName\":\"ActivateColumn\",\"Resizable\":false,\"Reorderable\":true,\"Groupable\":false,\"ColumnType\":\"GridButtonColumn\",\"Display\":true}]}]","_masterClientID":"ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ctl00","allowMultiRowSelection":true,"clientStateFieldID":"ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions_ClientState"}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlVersions_lstVersions"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxLoadingPanel, {"initialDelayTime":0,"isSticky":false,"minDisplayTime":0,"transparency":50,"uniqueID":"ctl00$RightPanelPlaceHolder$ctlGeneralReports$pnlLoadingPanel1","zIndex":90000}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlGeneralReports_pnlLoadingPanel1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadGrid, {"ClientID":"ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports","ClientSettings":{"EnableRowHoverStyle":true,"ColumnsReorderMethod":1,"ShouldCreateRows":true,"ReorderColumnsOnClient":true,"DataBinding":{},"Selecting":{"AllowRowSelect":true,"EnableDragToSelectRows":true},"Scrolling":{},"Resizing":{"AllowColumnResize":true,"ClipCellContentOnResize":true,"EnableRealTimeResize":true,"ResizeGridOnColumnResize":true},"ClientMessages":{}},"Skin":"DefaultTheme","UniqueID":"ctl00$RightPanelPlaceHolder$ctlGeneralReports$lstReports","_activeRowIndex":"","_controlToFocus":"","_currentPageIndex":0,"_editIndexes":"[]","_embeddedSkin":false,"_gridTableViewsData":"[{\"ClientID\":\"ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports_ctl00\",\"UniqueID\":\"ctl00$RightPanelPlaceHolder$ctlGeneralReports$lstReports$ctl00\",\"PageSize\":50,\"PageCount\":1,\"EditMode\":\"EditForms\",\"CurrentPageIndex\":0,\"VirtualItemCount\":0,\"AllowMultiColumnSorting\":false,\"IsItemInserted\":false,\"clientDataKeyNames\":[],\"_dataBindTemplates\":false,\"_selectedItemStyle\":\"\",\"_selectedItemStyleClass\":\"SelectedRow_DefaultTheme\",\"_columnsData\":[{\"UniqueName\":\"ShowColumn\",\"Resizable\":false,\"Reorderable\":true,\"Groupable\":false,\"ColumnType\":\"GridButtonColumn\",\"Display\":true},{\"UniqueName\":\"NameColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"DescriptionColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true}]}]","_masterClientID":"ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports_ctl00","allowMultiRowSelection":true,"clientStateFieldID":"ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports_ClientState"}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlGeneralReports_lstReports"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxPanel, {"clientEvents":{OnRequestStart:"",OnResponseEnd:""},"enableAJAX":true,"enableHistory":false,"links":[],"loadingPanelID":"ctl00_RightPanelPlaceHolder_ctlGeneralReports_pnlLoadingPanel1","styles":[],"uniqueID":"ctl00$RightPanelPlaceHolder$ctlGeneralReports$RadAjaxPanel1"}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlGeneralReports_RadAjaxPanel1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxLoadingPanel, {"initialDelayTime":0,"isSticky":false,"minDisplayTime":0,"transparency":50,"uniqueID":"ctl00$RightPanelPlaceHolder$ctlModuleReports$pnlLoadingPanel1","zIndex":90000}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlModuleReports_pnlLoadingPanel1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadGrid, {"ClientID":"ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports","ClientSettings":{"EnableRowHoverStyle":true,"ColumnsReorderMethod":1,"ShouldCreateRows":true,"ReorderColumnsOnClient":true,"DataBinding":{},"Selecting":{"AllowRowSelect":true,"EnableDragToSelectRows":true},"Scrolling":{},"Resizing":{"AllowColumnResize":true,"ClipCellContentOnResize":true,"EnableRealTimeResize":true,"ResizeGridOnColumnResize":true},"ClientMessages":{}},"Skin":"DefaultTheme","UniqueID":"ctl00$RightPanelPlaceHolder$ctlModuleReports$lstReports","_activeRowIndex":"","_controlToFocus":"","_currentPageIndex":0,"_editIndexes":"[]","_embeddedSkin":false,"_gridTableViewsData":"[{\"ClientID\":\"ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports_ctl00\",\"UniqueID\":\"ctl00$RightPanelPlaceHolder$ctlModuleReports$lstReports$ctl00\",\"PageSize\":50,\"PageCount\":1,\"EditMode\":\"EditForms\",\"CurrentPageIndex\":0,\"VirtualItemCount\":0,\"AllowMultiColumnSorting\":false,\"IsItemInserted\":false,\"clientDataKeyNames\":[],\"_dataBindTemplates\":false,\"_selectedItemStyle\":\"\",\"_selectedItemStyleClass\":\"SelectedRow_DefaultTheme\",\"_columnsData\":[{\"UniqueName\":\"ShowColumn\",\"Resizable\":false,\"Reorderable\":true,\"Groupable\":false,\"ColumnType\":\"GridButtonColumn\",\"Display\":true},{\"UniqueName\":\"NameColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"DescriptionColumn\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true}]}]","_masterClientID":"ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports_ctl00","allowMultiRowSelection":true,"clientStateFieldID":"ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports_ClientState"}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlModuleReports_lstReports"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxPanel, {"clientEvents":{OnRequestStart:"",OnResponseEnd:""},"enableAJAX":true,"enableHistory":false,"links":[],"loadingPanelID":"ctl00_RightPanelPlaceHolder_ctlModuleReports_pnlLoadingPanel1","styles":[],"uniqueID":"ctl00$RightPanelPlaceHolder$ctlModuleReports$RadAjaxPanel1"}, null, null, $get("ctl00_RightPanelPlaceHolder_ctlModuleReports_RadAjaxPanel1"));
+});
+//]]>
+</script>
+</form>
+
+<div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><div id="claude-agent-stop-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); justify-content: center; align-items: center; pointer-events: none; z-index: 2147483647;"><button id="claude-agent-stop-button" style="position: relative; transform: translateY(0px); padding: 12px 16px; background: rgb(250, 249, 245); color: rgb(20, 20, 19); border: 0.5px solid rgba(31, 30, 29, 0.4); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: rgba(217, 119, 87, 0.24) 0px 40px 80px, rgba(217, 119, 87, 0.24) 0px 4px 14px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; user-select: none; pointer-events: auto; white-space: nowrap; margin: 0px auto;">
+      <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="margin-right: 12px; vertical-align: middle;">
+        <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
+      </svg>
+      <span style="vertical-align: middle;">Stop Claude</span>
+    </button></div></body></html>
